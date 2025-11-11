@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useMemo } from 'react';
 import tendrLogo from '../../assets/logos/tendr-logo-secondary.png';
-
+import Navbar from '../../components/Navbar';
 const GiftHampersCakes = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -806,45 +806,10 @@ const GiftHampersCakes = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-pink-50 to-rose-100">
       {/* Header */}
-      <nav className="bg-white shadow-sm px-3 sm:px-6 py-3 sm:py-4 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <img
-              src={tendrLogo}
-              alt="tendr logo"
-              className="h-12 w-auto cursor-pointer"
-              onClick={handleLogoClick}
-            />
-          </div>
-          <div className="flex space-x-2 sm:space-x-4">
-            <a 
-              href="https://wa.me/1234567890" 
-              className="p-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors"
-              target="_blank" 
-              rel="noopener noreferrer"
-              onClick={handleWhatsAppClick}
-            >
-              💬
-            </a>
-            <button 
-              className="px-3 sm:px-6 py-1.5 sm:py-2 text-orange-600 border border-orange-600 rounded-full hover:bg-orange-50 transition-colors text-xs sm:text-sm"
-              onClick={handleSignInClick}
-            >
-              Sign In
-            </button>
-            <button 
-              className="px-3 sm:px-6 py-1.5 sm:py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors text-xs sm:text-sm"
-              onClick={handleSignUpClick}
-            >
-              Sign Up
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-12">
+      <Navbar/>
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-10 sm:py-12">
         {/* Page Header */}
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-center mb-8 sm:mb-0 py-12">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
             Gift Hampers & Cakes
           </h1>

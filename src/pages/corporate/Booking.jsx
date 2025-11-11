@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowDown, FiCheck, FiStar, FiUsers, FiCalendar, FiDollarSign, FiClock, FiShield, FiAward, FiGift, FiCamera, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 import BasicSpeedDial from "../../components/BasicSpeedDial";
+import Navbar from "../../components/Navbar.jsx";
+import Footer from "../../components/Footer";
 
 const plans = [
   {
@@ -121,11 +123,13 @@ export default function CorporateBooking() {
   };
 
   return (
+    
     <div className="min-h-screen bg-[#F7F4EF] py-4 sm:py-10 px-2 sm:px-4">
       <BasicSpeedDial />
       {/* Header */}
+      <Navbar/>
       <div className="bg-[#fff6eb] w-full py-4 sm:py-6 px-3 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 sm:gap-10 items-center">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 sm:gap-10 items-center py-10">
           <div className="lg:w-1/2 space-y-4 sm:space-y-6 text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#6B4226] leading-tight">
               Upgrade Corporate Events with{" "}
@@ -433,6 +437,7 @@ export default function CorporateBooking() {
           ))}
         </div>
       </div>
+      
     </div>
   );
 }

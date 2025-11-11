@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './CustomTemplateRequest.css';
-
+import Navbar from '../../components/Navbar.jsx';
 const CustomTemplateRequest = () => {
   const navigate = useNavigate();
   const { eventType } = useParams();
@@ -90,30 +90,7 @@ const CustomTemplateRequest = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
       {/* Header */}
-      <div className="bg-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => navigate(`/invitation/templates/${eventType}`)}
-                className="text-amber-600 hover:text-amber-700 transition-colors"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                  Custom Template Request
-                </h1>
-                <p className="text-lg text-gray-600">
-                  {currentEvent.icon} {currentEvent.name} - Tell us about your perfect template
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Navbar />
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

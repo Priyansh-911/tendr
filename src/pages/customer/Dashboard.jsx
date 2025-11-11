@@ -12,6 +12,7 @@ import { LayoutDashboard, IndianRupee, TicketSlash, ChartColumnDecreasing, UserR
 import MenuIcon from '@mui/icons-material/Menu';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import BasicSpeedDial from "../../components/BasicSpeedDial";
+import Navbar from "../../components/Navbar";
 
 const formatMoney1 = (amount) => {
   return `₹${amount.toLocaleString('en-IN')}`;
@@ -113,7 +114,7 @@ const UserDashboard = () => {
 
       {/* Navbar */}
       <div className="navbar bg-white border-b-2 border-[#CCAB4A]">
-        <Dashboards_Nav />
+        <Navbar />
       </div>
 
       {/* Main content below navbar, takes remaining height */}

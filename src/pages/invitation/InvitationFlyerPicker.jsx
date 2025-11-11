@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './InvitationFlyerPicker.css';
+import Navbar from '../../components/Navbar.jsx';
 
 const InvitationFlyerPicker = () => {
   const navigate = useNavigate();
@@ -66,31 +67,13 @@ const InvitationFlyerPicker = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
       {/* Header */}
-      <div className="bg-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
-                Invitation Flyers
-              </h1>
-              <p className="text-lg text-gray-600">
-                Create beautiful, customized invitations for your special events
-              </p>
-            </div>
-            <button
-              onClick={() => navigate('/')}
-              className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-amber-600 hover:to-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              ← Back to Home
-            </button>
-          </div>
-        </div>
-      </div>
+            <Navbar />
+
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12 py-12 mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4 mt-5">
             Choose Your Event Type
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">

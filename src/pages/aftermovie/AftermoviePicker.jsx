@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AftermoviePicker.css';
-
+import Navbar from '../../components/Navbar.jsx';
 const AftermoviePicker = () => {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState(null);
@@ -53,31 +53,12 @@ const AftermoviePicker = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       {/* Header */}
-      <div className="bg-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
-                Aftermovie Creator
-              </h1>
-              <p className="text-lg text-gray-600">
-                Transform your event memories into stunning videos with professional effects
-              </p>
-            </div>
-            <button
-              onClick={() => navigate('/')}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              ← Back to Home
-            </button>
-          </div>
-        </div>
-      </div>
+      <Navbar />
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+      <div className="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8 py-12">
+        <div className="text-center mb-12 py-12 mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3 mt-5">
             Choose Your Aftermovie Style
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">

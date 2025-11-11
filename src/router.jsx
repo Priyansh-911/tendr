@@ -55,6 +55,15 @@ import PaymentFailedPage from './pages/booking/PaymentFailedPage';
 import BookingConfirmation from './pages/booking/BookingConfirmation';
 
 
+import Layout from "./components/Layout.jsx";
+import InvitationFlyerPicker from "./pages/invitation/InvitationFlyerPicker.jsx";
+import TemplateGallery from "./pages/invitation/TemplateGallery.jsx";
+import InvitationCustomizer from "./pages/invitation/InvitationCustomizer.jsx";
+import InvitationPreview from "./pages/invitation/InvitationPreview.jsx";
+import CustomTemplateRequest from "./pages/invitation/CustomTemplateRequest.jsx";
+import AftermoviePicker from "./pages/aftermovie/AftermoviePicker.jsx";
+import AftermovieCustomizer from "./pages/aftermovie/AftermovieCustomizer.jsx";
+
 const router = createBrowserRouter([
   { 
     path: "/", 
@@ -312,6 +321,54 @@ const router = createBrowserRouter([
     element: <GiftHampersCakes />,
     errorElement: <ErrorPage />,
   },
+  // Invitation routes
+  {
+    path: '/invitation',
+    element: <InvitationFlyerPicker />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/invitation/templates/:eventType',
+    element: <TemplateGallery />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/invitation/customize/:eventType/:templateId',
+    element: <InvitationCustomizer />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/invitation/preview/:eventType/:templateId',
+    element: <InvitationPreview />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/invitation/custom-request/:eventType',
+    element: <CustomTemplateRequest />,
+    errorElement: <ErrorPage />,
+  },
+  // Aftermovie routes
+  {
+    path: '/aftermovie',
+    element: <AftermoviePicker />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/aftermovie/customize/:aftermovieType',
+    element: <AftermovieCustomizer />,
+    errorElement: <ErrorPage />,
+  },
+
+  {
+    element: <Layout />, // 👈 Global layout with Navbar + Footer
+    children: [
+      { path: "/", element: <Home /> },
+      {path: "/corporate", element: <CorporateBooking />},
+      {path:"/gift-hampers-cakes", element:<GiftHampersCakes />},
+      {path:"/booking", element:<ChooseBooking />},
+    ],
+  },
+  
 ]);
 
 

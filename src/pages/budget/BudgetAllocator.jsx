@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import BasicSpeedDial from "../../components/BasicSpeedDial";
+import Navbar from "../../components/Navbar";
 
 const eventTypes = {
   birthday: {
@@ -190,8 +191,9 @@ export default function BudgetAllocator() {
   return (
     <div className="min-w-screen mx-auto p-6 bg-white min-h-screen">
       <BasicSpeedDial />
+      <Navbar />
       
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-2 py-12 mt-7">
         <h1 className="text-3xl font-bold text-gray-800">Budget Allocator</h1>
         <div className="flex gap-2">
           <button
