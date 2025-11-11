@@ -15,6 +15,14 @@ import main3 from "../../assets/vendor-details/main-3.avif";
 import main4 from "../../assets/vendor-details/main-4.avif";
 import main5 from "../../assets/vendor-details/main-5.avif";
 
+import south_indian from "../../assets/vendor-details/south_indian-catering.jpeg";
+import north_indian from "../../assets/vendor-details/north_indian-catering.jpeg";
+import snacks from "../../assets/vendor-details/snacks-catering.jpeg";
+import beverage from "../../assets/vendor-details/beverage-catering.jpeg";
+import desert from "../../assets/vendor-details/desert-catering.jpeg";
+import live_counter from "../../assets/vendor-details/live_counter-catering.jpeg";
+import Footer from "../../components/Footer"; // ✅ Import reusable footer
+
 import { getVendorById } from "../../apis/vendorApi";
 import BasicSpeedDial from "../../components/BasicSpeedDial";
 import { useSelector } from "react-redux";
@@ -489,49 +497,7 @@ Event Type : ${filtersData.eventType}
       </div>
 
       {/* Footer (unchanged) */}
-      <div className="footer h-fit pt-20 pb-5 bg-[#FFD3C3] text-[#D48060] rounded-t-[40px] md:rounded-t-[80px] transition-colors duration-300">
-        <div className="top flex flex-col md:flex-row justify-between items-start md:items-center gap-10 mx-4 md:mx-20">
-          {/* Left Section */}
-          <div className="left flex flex-col gap-16">
-            <div className="top text-[45px] font-bold">tendr</div>
-            <div className="bottom flex flex-col gap-3">
-              <div className="first text-2xl font-semibold">Follow us on :-</div>
-              <div className="second flex gap-5">
-                <div className="group cursor-pointer transition-colors duration-300">
-                  <LinkedInIcon className="text-black group-hover:text-white" sx={{ fontSize: 40 }} />
-                </div>
-                <div className="group cursor-pointer transition-colors duration-300">
-                  <InstagramIcon className="text-black group-hover:text-white" sx={{ fontSize: 40 }} />
-                </div>
-                <div className="group cursor-pointer transition-colors duration-300">
-                  <FacebookIcon className="text-black group-hover:text-white" sx={{ fontSize: 40 }} />
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Right Section */}
-          <div className="right mt-4 font-bold text-[24px] flex flex-col gap-2">
-            {["Support", "Help Center", "Vendor Support", "Vendor", "Get in touch"].map((text, index) => (
-              <div key={index} className="group cursor-pointer transition-colors duration-300 hover:text-white">
-                {text}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="center text-[100px] md:text-[280px] lg:text-[380px] text-center font-bold text-[#D48060] leading-none">
-          tendr
-        </div>
-        <div className="bottom flex flex-col md:flex-row justify-between items-center gap-4 mx-4 md:mx-12 text-xl font-bold">
-          <div className="bottom mx-12 text-xl font-bold flex justify-between">
-            <div className="left group cursor-pointer transition-colors duration-300 hover:text-white">
-              Copyright 2025 | tendr
-            </div>
-            <div className="right group cursor-pointer transition-colors duration-300 hover:text-white">
-              Privacy policy
-            </div>
-          </div>
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 };

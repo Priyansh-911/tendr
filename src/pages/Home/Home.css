@@ -1009,13 +1009,8 @@ body {
 
 .footer-brand p {
   margin: 10px 0;
-  font-size: 1.2rem;
-  color: #a26320; 
-}
-
-.footer-brand strong{
-    font-weight: 700;
-    color: #4b2e0f;
+  font-size: 0.95rem;
+  color:#2e1b0f; ; 
 }
 
 .footer-brand a {

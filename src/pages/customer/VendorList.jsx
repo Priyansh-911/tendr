@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { getVendors } from "../../apis/vendorApi";
 import CompareBar from "../../components/CompareBar";
 import CompareModal from "../../components/CompareModal";
+import Footer from "../../components/Footer"; // ✅ Import reusable footer
 
 const VendorList = () => {
   const navigate = useNavigate();
@@ -465,55 +466,8 @@ const VendorList = () => {
       )}
 
       {/* Footer (unchanged) */}
-      <div className="footer h-fit pt-20 pb-5 bg-[#FFD3C3] text-[#D48060] rounded-t-[80px] transition-colors duration-300">
-        <div className="top mx-20 flex justify-between">
-          <div className="left flex flex-col gap-16">
-            <div className="top text-[45px] font-bold">tendr</div>
-            <div className="bottom flex flex-col gap-3">
-              <div className="first text-2xl font-semibold">Follow us on :-</div>
-              <div className="second flex gap-5">
-                <div className="group cursor-pointer transition-colors duration-300">
-                  <LinkedInIcon className="text-black group-hover:text-white" sx={{ fontSize: 40 }} />
-                </div>
-                <div className="group cursor-pointer transition-colors duration-300">
-                  <InstagramIcon className="text-black group-hover:text-white" sx={{ fontSize: 40 }} />
-                </div>
-                <div className="group cursor-pointer transition-colors duration-300">
-                  <FacebookIcon className="text-black group-hover:text-white" sx={{ fontSize: 40 }} />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="right mt-4 font-bold text-[24px] flex flex-col gap-2">
-            <div onClick={() => navigate("/plan-event/form")} className="group cursor-pointer transition-colors duration-300 hover:text-white">
-              Support
-            </div>
-            <div onClick={() => navigate("/plan-event/form")} className="group cursor-pointer transition-colors duration-300 hover:text-white">
-              Help Center
-            </div>
-            <div onClick={() => navigate("/vendor/register")} className="group cursor-pointer transition-colors duration-300 hover:text-white">
-              Vendor Support
-            </div>
-            <div onClick={() => navigate("/vendor/register")} className="group cursor-pointer transition-colors duration-300 hover:text-white">
-              Vendor
-            </div>
-            <div onClick={() => navigate("/plan-event/form")} className="group cursor-pointer transition-colors duration-300 hover:text-white">
-              Get in touch
-            </div>
-          </div>
-        </div>
-        <div className="relative overflow-hidden">
-          <div className="center mx-20 text-[380px] font-bold text-center leading-none">tendr</div>
-        </div>
-        <div className="bottom mx-12 text-xl font-bold flex justify-between">
-          <div className="left group cursor-pointer transition-colors duration-300 hover:text-white">
-            Copyright 2025 | tendr
-          </div>
-          <div className="right group cursor-pointer transition-colors duration-300 hover:text-white">
-            Privacy policy
-          </div>
-        </div>
-      </div>
+      
+      <Footer />
     </div>
   );
 };

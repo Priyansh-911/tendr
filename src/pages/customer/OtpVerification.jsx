@@ -1,3 +1,4 @@
+// src/pages/auth/OTPPage.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -76,8 +77,8 @@ const OTPPage = () => {
   const handleChange = (e) => {
     const value = e.target.value;
     const index = e.target.dataset.index;
-
     if (value.length > 1) return;
+
     const updatedOtp = [...otp];
     updatedOtp[index] = value;
     setOtp(updatedOtp);
@@ -88,10 +89,8 @@ const OTPPage = () => {
   };
 
   const handleKeyDown = (e, index) => {
-    if (e.key === "Backspace" && otp[index] === "") {
-      if (index > 0) {
-        document.getElementById(`otp-input-${index - 1}`).focus();
-      }
+    if (e.key === "Backspace" && otp[index] === "" && index > 0) {
+      document.getElementById(`otp-input-${index - 1}`).focus();
     }
   };
 
@@ -218,6 +217,7 @@ const OTPPage = () => {
                 {localError || error}
               </div>
             )}
+
             <form onSubmit={handleVerify} className="space-y-4 w-full">
               <div className="flex justify-evenly gap-2 mb-1">
                 {otp.map((digit, index) => (
@@ -235,6 +235,7 @@ const OTPPage = () => {
                   />
                 ))}
               </div>
+
               <div className="flex justify-between text-xs text-gray-700 font-medium px-1">
                 <span>
                   Remaining Time:{" "}
@@ -256,6 +257,7 @@ const OTPPage = () => {
                   </button>
                 </span>
               </div>
+
               <div className="flex justify-center mt-2">
                 <button
                   type="submit"
