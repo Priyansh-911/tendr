@@ -96,11 +96,14 @@ export default function CheckBox() {
   };
 
   return (
-    <div className="min-w-screen mx-auto px-40 py-40 bg-white min-h-screen">
-      <BasicSpeedDial/>
-      <div className="flex justify-between items-center mb-6 mt-[40px]">
-        <div className="text-4xl font-bold">Checklist Builder</div>
-        <div className="flex gap-2">
+    <div className="min-h-screen bg-white px-4 py-10 md:px-12 lg:px-24 xl:px-40 w-full">
+      <BasicSpeedDial />
+
+      {/* Header Section */}
+      <div className="flex flex-wrap justify-between items-center mb-6 mt-10 gap-4">
+        <div className="text-2xl md:text-4xl font-bold">Checklist Builder</div>
+
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={addEvent}
             className="px-4 py-2 bg-blue-500 text-white rounded"
@@ -143,8 +146,8 @@ export default function CheckBox() {
         </div>
       </div>
 
+      {/* PREVIEW MODE */}
       {preview ? (
-        // ✅ Preview timeline
         <div className="space-y-4">
           {events.map((event, index) => (
             <div
@@ -158,6 +161,7 @@ export default function CheckBox() {
                 checked={event.checked}
                 onChange={() => toggleCheckbox(event.id)}
               />
+
               <div>
                 <h2 className="text-lg font-semibold">
                   {index + 1}. {event.title || "Untitled"}
@@ -168,16 +172,24 @@ export default function CheckBox() {
           ))}
         </div>
       ) : (
-    
+        /* EDIT MODE */
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="timeline">
             {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-3">
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                className="space-y-3"
+              >
                 {events.map((event, index) => (
-                  <Draggable key={event.id} draggableId={event.id} index={index}>
+                  <Draggable
+                    key={event.id}
+                    draggableId={event.id}
+                    index={index}
+                  >
                     {(provided) => (
                       <div
-                        className="flex items-center gap-4 border p-4 rounded-lg bg-gray-50"
+                        className="flex flex-col md:flex-row items-start md:items-center gap-4 border p-4 rounded-lg bg-gray-50"
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -189,7 +201,7 @@ export default function CheckBox() {
                           onChange={() => toggleCheckbox(event.id)}
                         />
 
-                        <div className="flex-1">
+                        <div className="flex-1 w-full">
                           <input
                             type="text"
                             placeholder="Event title"
@@ -203,7 +215,11 @@ export default function CheckBox() {
                             placeholder="Event description"
                             value={event.description}
                             onChange={(e) =>
-                              updateEvent(event.id, "description", e.target.value)
+                              updateEvent(
+                                event.id,
+                                "description",
+                                e.target.value
+                              )
                             }
                             className="w-full border p-2 rounded"
                           />
@@ -211,7 +227,7 @@ export default function CheckBox() {
 
                         <button
                           onClick={() => deleteEvent(event.id)}
-                          className="px-3 py-1 bg-red-400 text-white rounded"
+                          className="px-3 py-1 bg-red-400 text-white rounded self-end md:self-center"
                         >
                           ✕
                         </button>

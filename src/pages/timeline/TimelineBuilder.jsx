@@ -37,9 +37,12 @@ export default function TimelineBuilder() {
   };
 
   return (
-    <div className="p-6 min-h-screen mx-auto bg-white px-40 py-40">
-      <div className="flex justify-between items-center mb-6">
-        <div className="text-4xl font-bold">Custom Timeline Builder</div>
+    <div className="min-h-screen bg-white px-4 py-10 md:px-12 lg:px-24 xl:px-40">
+      <div className="flex flex-wrap justify-between items-center mb-8 gap-4">
+        <div className="text-2xl md:text-4xl font-bold">
+          Custom Timeline Builder
+        </div>
+
         <button
           onClick={() => setPreview(!preview)}
           className="px-4 py-2 rounded-lg bg-blue-500 text-white"
@@ -51,27 +54,33 @@ export default function TimelineBuilder() {
       {preview ? (
         // -------------------- Preview Mode --------------------
         <div className="relative">
-          {/* vertical line in the center */}
+          {/* center vertical line */}
           <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gray-300 -translate-x-1/2"></div>
 
           <div className="space-y-12">
             {events.map((event, index) => {
-              const isLeft = index % 2 === 0; // alternate left/right
+              const isLeft = index % 2 === 0;
+
               return (
                 <div
                   key={event.id}
-                  className={`relative flex w-full ${
-                    isLeft ? "justify-start pr-1/2" : "justify-end pl-1/2"
-                  }`}
+                  className={`relative flex w-full 
+                  ${
+                    isLeft
+                      ? "justify-start pr-0 md:pr-[50%]"
+                      : "justify-end pl-0 md:pl-[50%]"
+                  }
+                `}
                 >
-                  {/* dot on the timeline */}
+                  {/* timeline dot */}
                   <div className="absolute left-1/2 top-4 w-4 h-4 rounded-full border-2 border-blue-500 bg-white -translate-x-1/2"></div>
 
                   {/* card */}
                   <div
-                    className={`w-5/12 p-4 rounded-lg shadow bg-white ${
-                      event.checked ? "opacity-60 line-through" : ""
-                    }`}
+                    className={`
+                    w-full md:w-5/12 p-4 rounded-lg shadow bg-white 
+                    ${event.checked ? "opacity-60 line-through" : ""}
+                  `}
                   >
                     <div className="flex items-start gap-3">
                       <input
@@ -80,6 +89,7 @@ export default function TimelineBuilder() {
                         onChange={() => toggleCheckbox(event.id)}
                         className="mt-1"
                       />
+
                       <div>
                         <h2 className="text-lg font-semibold">
                           {event.title || "Untitled"}
@@ -99,9 +109,17 @@ export default function TimelineBuilder() {
           <DragDropContext onDragEnd={handleDragEnd}>
             <Droppable droppableId="timeline">
               {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-4">
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className="space-y-4"
+                >
                   {events.map((event, index) => (
-                    <Draggable key={event.id} draggableId={event.id} index={index}>
+                    <Draggable
+                      key={event.id}
+                      draggableId={event.id}
+                      index={index}
+                    >
                       {(provided) => (
                         <div
                           ref={provided.innerRef}
@@ -113,13 +131,21 @@ export default function TimelineBuilder() {
                             type="text"
                             placeholder="Title"
                             value={event.title}
-                            onChange={(e) => updateEvent(event.id, "title", e.target.value)}
+                            onChange={(e) =>
+                              updateEvent(event.id, "title", e.target.value)
+                            }
                             className="w-full p-2 mb-2 border rounded"
                           />
                           <textarea
                             placeholder="Description"
                             value={event.description}
-                            onChange={(e) => updateEvent(event.id, "description", e.target.value)}
+                            onChange={(e) =>
+                              updateEvent(
+                                event.id,
+                                "description",
+                                e.target.value
+                              )
+                            }
                             className="w-full p-2 border rounded"
                           />
                         </div>
