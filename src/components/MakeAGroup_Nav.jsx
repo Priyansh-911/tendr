@@ -48,77 +48,76 @@ const MakeAGroup_Nav = () => {
 
 
     return (
-        <>
-            <div className="top flex w-full justify-between px-3 py-3">
-                <div className="logo">
-                    <img
-                        src={logo}
-                        alt="tendr logo"
-                        style={{ height: "60px" }}
-                        className='transition duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer'
-                        onClick={() => navigate("/")}
-                    />
+      <>
+        <div className="top w-full flex items-center justify-between px-3 py-3">
+          {/* Logo */}
+          <div className="logo cursor-pointer" onClick={() => navigate("/")}>
+            <img
+              src={logo}
+              alt="tendr logo"
+              className="h-8 sm:h-14 md:h-16 transition duration-300 ease-in-out transform hover:-translate-y-1"
+            />
+          </div>
+
+          {/* Authenticated User */}
+          {isAuthenticated ? (
+            <div className="relative flex items-center">
+              {/* Badge */}
+              <div
+                onClick={() => setIsModalOpen(!isModalOpen)}
+                className="w-10 h-10 bg-[#CCAB4A] text-white rounded-full flex items-center justify-center text-xl font-bold shadow-md cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95"
+              >
+                {userInitial}
+              </div>
+
+              {/* Modal */}
+              {isModalOpen && (
+                <div className="absolute top-12 right-0 w-44 sm:w-48 bg-[#F7F4EF] rounded-xl shadow-lg py-2 z-50">
+                  {/* Dashboard */}
+                  <div
+                    onClick={handleDashboard}
+                    className="flex items-center gap-2 px-4 py-2 text-[#D48060] font-semibold hover:bg-[#FFD3C3] cursor-pointer transition-colors"
+                  >
+                    <DashboardIcon fontSize="small" />
+                    <span>Dashboard</span>
+                  </div>
+
+                  {/* Logout */}
+                  <div
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 px-4 py-2 text-[#D48060] font-semibold hover:bg-[#FFD3C3] cursor-pointer transition-colors"
+                  >
+                    <LogoutIcon fontSize="small" />
+                    <span>Logout</span>
+                  </div>
                 </div>
-
-                {/* Conditional rendering based on authentication */}
-                {isAuthenticated ? (
-                    <div className="user-badge relative flex items-center">
-                        {/* User Badge */}
-                        <div
-                            onClick={() => setIsModalOpen(!isModalOpen)}
-                            className="w-10 h-10 bg-[#CCAB4A] text-white rounded-full flex items-center justify-center text-xl font-bold shadow-md cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
-                        >
-                            {userInitial}
-                        </div>
-
-                        {/* Modal for Dashboard and Logout */}
-                        {isModalOpen && (
-                            <div className="user-modal absolute top-12 right-0 w-48 bg-[#F7F4EF] rounded-xl shadow-lg py-2 z-50">
-                                {/* Dashboard Option */}
-                                <div
-                                    onClick={handleDashboard}
-                                    className="flex items-center gap-2 px-4 py-2 text-[#D48060] font-semibold hover:bg-[#FFD3C3] cursor-pointer transition-colors duration-300"
-                                >
-                                    <DashboardIcon fontSize="small" />
-                                    <span>Dashboard</span>
-                                </div>
-                                {/* Logout Option */}
-                                <div
-                                    onClick={handleLogout}
-                                    className="flex items-center gap-2 px-4 py-2 text-[#D48060] font-semibold hover:bg-[#FFD3C3] cursor-pointer transition-colors duration-300"
-                                >
-                                    <LogoutIcon fontSize="small" />
-                                    <span>Logout</span>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                ) : (
-                    <div className="btns flex items-center justify-between w-[220px] px-1">
-                        <button
-                            type="button"
-                            onClick={() => navigate("/signup")}
-                            className="group bg-[#ea7e53] text-white rounded-xl px-4 py-2 flex items-center justify-center font-bold w-[100px] h-[40px] transition duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 active:scale-95"
-                        >
-                            <span className="transition duration-300">
-                                Sign Up
-                            </span>
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={() => navigate("/login")}
-                            className="group bg-[#ea7e53] text-white rounded-xl px-4 py-2 flex items-center justify-center font-bold w-[100px] h-[40px] transition duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 active:scale-95"
-                        >
-                            <span className="transition duration-300">
-                                Sign In
-                            </span>
-                        </button>
-                    </div>
-                )}
+              )}
             </div>
-        </>
-    )
+          ) : (
+            /* Not Logged In */
+            <div className="btns flex items-center justify-end gap-2 w-auto">
+              {/* Signup */}
+              <button
+                type="button"
+                onClick={() => navigate("/signup")}
+                className="bg-[#ea7e53] text-white rounded-xl px-4 py-2 font-bold w-24 sm:w-28 h-8 flex items-center justify-center transition duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
+              >
+                Sign Up
+              </button>
+
+              {/* Signin */}
+              <button
+                type="button"
+                onClick={() => navigate("/login")}
+                className="bg-[#ea7e53] text-white rounded-xl px-4 py-2 font-bold w-24 sm:w-28 h-8 flex items-center justify-center transition duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
+              >
+                Sign In
+              </button>
+            </div>
+          )}
+        </div>
+      </>
+    );
 }
 
 export default MakeAGroup_Nav
