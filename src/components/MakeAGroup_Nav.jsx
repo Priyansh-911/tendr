@@ -49,7 +49,7 @@ const MakeAGroup_Nav = () => {
 
     return (
       <>
-        <div className="top w-full flex items-center justify-between px-3 py-3">
+        <div className="top w-full flex items-center justify-between px-3 py-3 sticky top-0 z-50">
           {/* Logo */}
           <div className="logo cursor-pointer" onClick={() => navigate("/")}>
             <img
