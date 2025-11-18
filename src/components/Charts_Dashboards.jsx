@@ -61,7 +61,7 @@ export const LineChart_UserVendorGrowth_AdminDashboard = () => {
     };
 
     return (
-        <div className="w-full h-[300px] cursor-pointer">
+        <div className="w-full min-h-full cursor-pointer">
             <Line data={data} options={options} />
         </div>
     );
@@ -111,7 +111,7 @@ export const LineChart_BookingsPerMonth_AdminDashboard = () => {
     };
 
     return (
-        <div className="w-full h-[300px] cursor-pointer">
+        <div className="w-full min-h-full cursor-pointer">
             <Line data={data} options={options} />
         </div>
     );
@@ -141,7 +141,7 @@ export const Doughnut_BookingCategory_AdminDashboard = () => {
     };
 
     return (
-        <div className="w-[300px] h-[300px] cursor-pointer">
+        <div className="w-full min-h-full cursor-pointer flex justify-center items-center">
             <Doughnut data={data} />
         </div>
     );
@@ -172,9 +172,9 @@ export const Doughnut_BookingCity_AdminDashboard = () => {
     };
 
     return (
-        <div className="w-[300px] h-[300px] cursor-pointer">
-            <Doughnut data={data} />
-        </div>
+      <div className="w-full min-h-full cursor-pointer flex justify-center items-center">
+        <Doughnut data={data} />
+      </div>
     );
 };
 
@@ -283,9 +283,9 @@ export const LineChart_UserNew_AdminDashboard = () => {
     };
 
     return (
-        <div className="w-full h-[300px] cursor-pointer">
-            <Line data={data} options={options} />
-        </div>
+      <div className="w-full min-h-full cursor-pointer flex justify-center items-center">
+        <Line data={data} options={options} />
+      </div>
     );
 };
 
