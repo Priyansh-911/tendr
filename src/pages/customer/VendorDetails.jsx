@@ -18,6 +18,7 @@ import main5 from "../../assets/vendor-details/main-5.avif";
 import { getVendorById } from "../../apis/vendorApi";
 import BasicSpeedDial from "../../components/BasicSpeedDial";
 import { useSelector } from "react-redux";
+import Footer from "../../components/Footer";
 
 const VendorDetailsPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -489,10 +490,9 @@ Event Type : ${filtersData.eventType}
       </div>
 
       {/* Footer (unchanged) */}
-      <div className="footer h-fit pt-20 pb-5 bg-[#FFD3C3] text-[#D48060] rounded-t-[40px] md:rounded-t-[80px] transition-colors duration-300">
-        <div className="top flex flex-col md:flex-row justify-between items-start md:items-center gap-10 mx-4 md:mx-20">
-          {/* Left Section */}
-          <div className="left flex flex-col gap-16">
+      {/* <div className="footer h-fit pt-20 pb-5 bg-[#FFD3C3] text-[#D48060] rounded-t-[40px] md:rounded-t-[80px] transition-colors duration-300"> */}
+        {/* <div className="top flex flex-col md:flex-row justify-between items-start md:items-center gap-10 mx-4 md:mx-20">
+          {/* <div className="left flex flex-col gap-16">
             <div className="top text-[45px] font-bold">tendr</div>
             <div className="bottom flex flex-col gap-3">
               <div className="first text-2xl font-semibold">Follow us on :-</div>
@@ -508,17 +508,16 @@ Event Type : ${filtersData.eventType}
                 </div>
               </div>
             </div>
-          </div>
-          {/* Right Section */}
-          <div className="right mt-4 font-bold text-[24px] flex flex-col gap-2">
+          </div> */}
+          {/* <div className="right mt-4 font-bold text-[24px] flex flex-col gap-2">
             {["Support", "Help Center", "Vendor Support", "Vendor", "Get in touch"].map((text, index) => (
               <div key={index} className="group cursor-pointer transition-colors duration-300 hover:text-white">
                 {text}
               </div>
             ))}
-          </div>
-        </div>
-        <div className="center text-[100px] md:text-[280px] lg:text-[380px] text-center font-bold text-[#D48060] leading-none">
+          </div> */}
+        {/* </div>  */}
+        {/* <div className="center text-[100px] md:text-[280px] lg:text-[380px] text-center font-bold text-[#D48060] leading-none">
           tendr
         </div>
         <div className="bottom flex flex-col md:flex-row justify-between items-center gap-4 mx-4 md:mx-12 text-xl font-bold">
@@ -530,8 +529,10 @@ Event Type : ${filtersData.eventType}
               Privacy policy
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
+
+      <Footer />
     </div>
   );
 };

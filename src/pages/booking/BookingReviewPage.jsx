@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 function BookingReviewPage() {
   const navigate = useNavigate();
@@ -173,9 +174,7 @@ function BookingReviewPage() {
       </div>
 
       {/* Footer */}
-      <footer className="text-center text-sm text-gray-600 py-4 mt-1 border-t">
-        tendr © | Support | Help Center | Vendor Support | Get in touch
-      </footer>
+      <Footer />
     </div>
   );
 }

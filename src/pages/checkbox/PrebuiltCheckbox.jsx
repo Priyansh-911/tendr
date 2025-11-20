@@ -205,16 +205,18 @@ export default function CheckBox() {
   };
 
   return (
-    <div className="min-w-screen mx-auto px-40 py-20 bg-white min-h-screen">
-      <BasicSpeedDial/>
+    <div className="min-h-screen bg-white w-full p-4 sm:p-8 md:p-12">
+      <BasicSpeedDial />
 
       {/* Event selector */}
-      <div className="mb-6">
-        <label className="block mb-2 font-medium text-gray-700 text-2xl">Choose Event:</label>
+      <div className="mb-6 max-w-4xl mx-auto">
+        <label className="block mb-2 font-medium text-gray-700 text-xl sm:text-2xl">
+          Choose Event:
+        </label>
         <select
           value={selectedEvent}
           onChange={handleSelectEvent}
-          className="border rounded px-4 py-2"
+          className="border rounded px-4 py-2 w-full max-w-xs"
         >
           <option value="">-- Select Event --</option>
           <option value="wedding">Wedding</option>
@@ -223,24 +225,46 @@ export default function CheckBox() {
         </select>
       </div>
 
-      <div className="flex justify-between items-center mb-6 mt-[40px]">
-        <div className="text-4xl font-bold">Checklist Builder</div>
-        <div className="flex gap-2">
-          <button onClick={addEvent} className="px-4 py-2 bg-blue-500 text-white rounded">
+      {/* Header + Actions */}
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 max-w-6xl mx-auto mb-6 mt-10">
+        <div className="text-3xl sm:text-4xl font-bold">Checklist Builder</div>
+
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={addEvent}
+            className="px-4 py-2 bg-blue-500 text-white rounded"
+          >
             + Add Event
           </button>
-          <button onClick={exportTimeline} className="px-4 py-2 bg-green-500 text-white rounded">
+
+          <button
+            onClick={exportTimeline}
+            className="px-4 py-2 bg-green-500 text-white rounded"
+          >
             Export
           </button>
+
           <label className="px-4 py-2 bg-yellow-500 text-white rounded cursor-pointer">
             Import
-            <input type="file" accept=".json" className="hidden" onChange={importTimeline} />
+            <input
+              type="file"
+              accept=".json"
+              className="hidden"
+              onChange={importTimeline}
+            />
           </label>
-          <button onClick={clearTimeline} className="px-4 py-2 bg-red-500 text-white rounded">
+
+          <button
+            onClick={clearTimeline}
+            className="px-4 py-2 bg-red-500 text-white rounded"
+          >
             Clear
           </button>
+
           <button
-            className={`px-4 py-2 rounded ${preview ? "bg-purple-600 text-white" : "bg-gray-200"}`}
+            className={`px-4 py-2 rounded ${
+              preview ? "bg-purple-600 text-white" : "bg-gray-200"
+            }`}
             onClick={() => setPreview(!preview)}
           >
             {preview ? "Exit Preview" : "Preview Mode"}
@@ -248,9 +272,9 @@ export default function CheckBox() {
         </div>
       </div>
 
+      {/* PREVIEW MODE */}
       {preview ? (
-        // ✅ Preview mode
-        <div className="space-y-4">
+        <div className="space-y-4 max-w-6xl mx-auto">
           {events.map((event, index) => (
             <div
               key={event.id}
@@ -273,57 +297,77 @@ export default function CheckBox() {
           ))}
         </div>
       ) : (
-        // ✅ Editable mode with drag/drop
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="timeline">
-            {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-3">
-                {events.map((event, index) => (
-                  <Draggable key={event.id} draggableId={event.id} index={index}>
-                    {(provided) => (
-                      <div
-                        className="flex items-center gap-4 border p-4 rounded-lg bg-gray-50"
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={event.checked}
-                          onChange={() => toggleCheckbox(event.id)}
-                        />
-                        <div className="flex-1">
-                          <input
-                            type="text"
-                            placeholder="Event title"
-                            value={event.title}
-                            onChange={(e) => updateEvent(event.id, "title", e.target.value)}
-                            className="w-full border p-2 rounded mb-2"
-                          />
-                          <textarea
-                            placeholder="Event description"
-                            value={event.description}
-                            onChange={(e) =>
-                              updateEvent(event.id, "description", e.target.value)
-                            }
-                            className="w-full border p-2 rounded"
-                          />
-                        </div>
-                        <button
-                          onClick={() => deleteEvent(event.id)}
-                          className="px-3 py-1 bg-red-400 text-white rounded"
+        // EDIT MODE
+        <div className="max-w-6xl mx-auto">
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="timeline">
+              {(provided) => (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className="space-y-3"
+                >
+                  {events.map((event, index) => (
+                    <Draggable
+                      key={event.id}
+                      draggableId={event.id}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <div
+                          className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border p-4 rounded-lg bg-gray-50"
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
                         >
-                          ✕
-                        </button>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+                          <input
+                            type="checkbox"
+                            checked={event.checked}
+                            onChange={() => toggleCheckbox(event.id)}
+                          />
+
+                          <div className="flex-1 w-full">
+                            <input
+                              type="text"
+                              placeholder="Event title"
+                              value={event.title}
+                              onChange={(e) =>
+                                updateEvent(event.id, "title", e.target.value)
+                              }
+                              className="w-full border p-2 rounded mb-2"
+                            />
+
+                            <textarea
+                              placeholder="Event description"
+                              value={event.description}
+                              onChange={(e) =>
+                                updateEvent(
+                                  event.id,
+                                  "description",
+                                  e.target.value
+                                )
+                              }
+                              className="w-full border p-2 rounded"
+                            />
+                          </div>
+
+                          <button
+                            onClick={() => deleteEvent(event.id)}
+                            className="px-3 py-1 bg-red-400 text-white rounded self-end sm:self-center"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
       )}
     </div>
   );

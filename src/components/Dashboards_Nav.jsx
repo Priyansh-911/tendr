@@ -1,8 +1,11 @@
 import React from 'react'
 
 import logo from "../assets/logos/tendr-logo-secondary.png";
+import { useNavigate } from 'react-router-dom';
 
 const Dashboards_Nav = () => {
+    const navigate = useNavigate();
+    
     return (
         <>
             <div className="top flex w-full justify-between px-3 py-2">

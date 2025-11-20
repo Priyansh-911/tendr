@@ -2,6 +2,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/logos/tendr-logo-secondary.png";
+import Footer from "../../components/Footer";
 
 const BookingConfirmationPage = () => {
   const navigate = useNavigate();
@@ -83,9 +84,7 @@ const BookingConfirmationPage = () => {
       </div>
 
       {/* Footer */}
-      <footer className="w-full text-gray-600 text-sm py-4 text-center border-t">
-        tendr © | Support | Help Center | Vendor Support
-      </footer>
+      <Footer />
     </div>
   );
 };
