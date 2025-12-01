@@ -190,10 +190,21 @@ export default function BudgetAllocator() {
   return (
     <div className="min-w-screen mx-auto p-6 bg-white min-h-screen">
       <BasicSpeedDial />
-      
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Budget Allocator</h1>
-        <div className="flex gap-2">
+
+      <div
+        className="
+  flex flex-col sm:flex-row 
+  justify-between sm:items-center 
+  mb-6 gap-4 sm:gap-2
+"
+      >
+        {/* Title */}
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+          Budget Allocator
+        </h1>
+
+        {/* Buttons */}
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={exportBudget}
             className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
@@ -219,9 +230,12 @@ export default function BudgetAllocator() {
           </button>
 
           <button
-            className={`px-4 py-2 rounded transition-colors ${
-              preview ? "bg-purple-600 text-white" : "bg-gray-200 hover:bg-gray-300"
-            }`}
+            className={`
+        px-4 py-2 rounded transition-colors
+        ${
+          preview ? "bg-purple-600 text-white" : "bg-gray-200 hover:bg-gray-300"
+        }
+      `}
             onClick={() => setPreview(!preview)}
           >
             {preview ? "Exit Preview" : "Preview Mode"}
@@ -239,9 +253,9 @@ export default function BudgetAllocator() {
             <button
               onClick={() => setIsCustomMode(false)}
               className={`px-4 py-2 rounded-lg transition-colors ${
-                !isCustomMode 
-                  ? 'bg-orange-500 text-white' 
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                !isCustomMode
+                  ? "bg-orange-500 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               }`}
             >
               Predefined
@@ -249,9 +263,9 @@ export default function BudgetAllocator() {
             <button
               onClick={() => setIsCustomMode(true)}
               className={`px-4 py-2 rounded-lg transition-colors ${
-                isCustomMode 
-                  ? 'bg-orange-500 text-white' 
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                isCustomMode
+                  ? "bg-orange-500 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               }`}
             >
               Custom
@@ -261,7 +275,10 @@ export default function BudgetAllocator() {
 
         {isCustomMode ? (
           <div>
-            <label htmlFor="custom-budget-name" className="block text-lg font-semibold mb-3 text-gray-700">
+            <label
+              htmlFor="custom-budget-name"
+              className="block text-lg font-semibold mb-3 text-gray-700"
+            >
               Custom Budget Name:
             </label>
             <input
@@ -275,7 +292,10 @@ export default function BudgetAllocator() {
           </div>
         ) : (
           <div>
-            <label htmlFor="event-type" className="block text-lg font-semibold mb-3 text-gray-700">
+            <label
+              htmlFor="event-type"
+              className="block text-lg font-semibold mb-3 text-gray-700"
+            >
               Select Event Type:
             </label>
             <select
@@ -296,7 +316,10 @@ export default function BudgetAllocator() {
 
       {/* Budget Input */}
       <div className="mb-8">
-        <label htmlFor="total-budget" className="block text-lg font-semibold mb-3 text-gray-700">
+        <label
+          htmlFor="total-budget"
+          className="block text-lg font-semibold mb-3 text-gray-700"
+        >
           Total Budget (₹):
         </label>
         <input
@@ -314,37 +337,59 @@ export default function BudgetAllocator() {
         // Preview Mode
         <div className="space-y-6">
           <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 rounded-lg">
-            <h2 className="text-2xl font-bold mb-2">{currentEvent.name} Budget Breakdown</h2>
-            <p className="text-lg">Total Budget: ₹{totalBudget.toLocaleString()}</p>
+            <h2 className="text-2xl font-bold mb-2">
+              {currentEvent.name} Budget Breakdown
+            </h2>
+            <p className="text-lg">
+              Total Budget: ₹{totalBudget.toLocaleString()}
+            </p>
           </div>
 
           <div className="grid gap-4">
             {allocations.map((category, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+              <div
+                key={index}
+                className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
+              >
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-semibold text-gray-800">{category.name}</h3>
-                  <span className="text-xl font-bold text-gray-900">₹{category.amount.toLocaleString()}</span>
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    {category.name}
+                  </h3>
+                  <span className="text-xl font-bold text-gray-900">
+                    ₹{category.amount.toLocaleString()}
+                  </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
                   <div
                     className="h-3 rounded-full transition-all duration-500"
                     style={{
-                      width: `${(customAllocations[category.name] || category.percentage)}%`,
-                      backgroundColor: category.color
+                      width: `${
+                        customAllocations[category.name] || category.percentage
+                      }%`,
+                      backgroundColor: category.color,
                     }}
                   ></div>
                 </div>
                 <p className="text-sm text-gray-600 mt-1">
-                  {(customAllocations[category.name] || category.percentage)}% of total budget
+                  {customAllocations[category.name] || category.percentage}% of
+                  total budget
                 </p>
               </div>
             ))}
           </div>
 
           {remaining !== 0 && (
-            <div className={`p-4 rounded-lg ${remaining > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+            <div
+              className={`p-4 rounded-lg ${
+                remaining > 0
+                  ? "bg-green-100 text-green-800"
+                  : "bg-red-100 text-red-800"
+              }`}
+            >
               <p className="font-semibold">
-                {remaining > 0 ? `Remaining Budget: ₹${remaining.toLocaleString()}` : `Over Budget: ₹${Math.abs(remaining).toLocaleString()}`}
+                {remaining > 0
+                  ? `Remaining Budget: ₹${remaining.toLocaleString()}`
+                  : `Over Budget: ₹${Math.abs(remaining).toLocaleString()}`}
               </p>
             </div>
           )}
@@ -352,8 +397,12 @@ export default function BudgetAllocator() {
       ) : (
         // Edit Mode
         <div className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-gray-800">Budget Allocation</h2>
+          {/* Title + Reset */}
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+            <h2 className="text-2xl font-bold text-gray-800">
+              Budget Allocation
+            </h2>
+
             <button
               onClick={resetToDefault}
               className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
@@ -362,30 +411,57 @@ export default function BudgetAllocator() {
             </button>
           </div>
 
+          {/* Category List */}
           <div className="grid gap-6">
             {currentEvent.categories.map((category, index) => (
-              <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                <div className="flex justify-between items-center mb-4">
+              <div
+                key={index}
+                className="bg-gray-50 border border-gray-200 rounded-lg p-6"
+              >
+                {/* Top Row */}
+                <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-4 mb-4">
+                  {/* Category Name */}
                   {isCustomMode ? (
                     <input
                       type="text"
-                      value={customCategoryNames[`Category ${index + 1}`] || `Category ${index + 1}`}
-                      onChange={(e) => updateCategoryName(`Category ${index + 1}`, e.target.value)}
-                      className="text-lg font-semibold text-gray-800 bg-transparent border-b border-gray-300 focus:border-orange-500 focus:outline-none"
+                      value={
+                        customCategoryNames[`Category ${index + 1}`] ||
+                        `Category ${index + 1}`
+                      }
+                      onChange={(e) =>
+                        updateCategoryName(
+                          `Category ${index + 1}`,
+                          e.target.value
+                        )
+                      }
+                      className="text-lg font-semibold text-gray-800 bg-transparent border-b border-gray-300 focus:border-orange-500 focus:outline-none w-full lg:w-auto"
                       placeholder={`Category ${index + 1}`}
                     />
                   ) : (
-                    <h3 className="text-lg font-semibold text-gray-800">{category.name}</h3>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      {category.name}
+                    </h3>
                   )}
-                  <div className="flex items-center gap-4">
-                    <span className="text-xl font-bold text-gray-900">
+
+                  {/* Amount + Input */}
+                  <div className="flex flex-wrap items-center gap-4">
+                    <span className="text-xl font-bold text-gray-900 whitespace-nowrap">
                       ₹{allocations[index].amount.toLocaleString()}
                     </span>
+
                     <div className="flex items-center gap-2">
                       <input
                         type="number"
-                        value={customAllocations[category.name] || category.percentage}
-                        onChange={(e) => updateAllocation(category.name, Number(e.target.value))}
+                        value={
+                          customAllocations[category.name] ||
+                          category.percentage
+                        }
+                        onChange={(e) =>
+                          updateAllocation(
+                            category.name,
+                            Number(e.target.value)
+                          )
+                        }
                         className="w-20 p-2 border border-gray-300 rounded text-center"
                         min="0"
                         max="100"
@@ -395,40 +471,60 @@ export default function BudgetAllocator() {
                     </div>
                   </div>
                 </div>
-                
+
+                {/* Progress Bar */}
                 <div className="w-full bg-gray-200 rounded-full h-4 mb-2">
                   <div
                     className="h-4 rounded-full transition-all duration-300"
                     style={{
-                      width: `${customAllocations[category.name] || category.percentage}%`,
-                      backgroundColor: category.color
+                      width: `${
+                        customAllocations[category.name] || category.percentage
+                      }%`,
+                      backgroundColor: category.color,
                     }}
                   ></div>
                 </div>
-                
+
+                {/* Labels */}
                 <div className="flex justify-between text-sm text-gray-600">
                   <span>Default: {category.percentage}%</span>
-                  <span>Current: {customAllocations[category.name] || category.percentage}%</span>
+                  <span>
+                    Current:{" "}
+                    {customAllocations[category.name] || category.percentage}%
+                  </span>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Summary */}
+          {/* SUMMARY CARD */}
           <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Budget Summary</h3>
+            <h3 className="text-xl font-bold text-gray-800 mb-4">
+              Budget Summary
+            </h3>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center">
                 <p className="text-gray-600">Total Budget</p>
-                <p className="text-2xl font-bold text-gray-900">₹{totalBudget.toLocaleString()}</p>
+                <p className="text-2xl font-bold text-gray-900">
+                  ₹{totalBudget.toLocaleString()}
+                </p>
               </div>
+
               <div className="text-center">
                 <p className="text-gray-600">Allocated</p>
-                <p className="text-2xl font-bold text-blue-600">₹{totalAllocated.toLocaleString()}</p>
+                <p className="text-2xl font-bold text-blue-600">
+                  ₹{totalAllocated.toLocaleString()}
+                </p>
               </div>
+
               <div className="text-center">
                 <p className="text-gray-600">Remaining</p>
-                <p className={`text-2xl font-bold ${remaining >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <p
+                  className={`text-2xl font-bold ${
+                    remaining >= 0 ? "text-green-600" : "text-red-600"
+                  }`}
+                >
                   ₹{remaining.toLocaleString()}
                 </p>
               </div>
