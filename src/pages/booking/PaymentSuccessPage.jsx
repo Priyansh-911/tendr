@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "../../assets/logos/tendr-logo-secondary.png";
+import Footer from "../../components/Footer";
 
 const PaymentSuccessPage = () => {
   const { state } = useLocation();
@@ -119,9 +120,7 @@ const PaymentSuccessPage = () => {
       </div>
 
       {/* Footer */}
-      <footer className="w-full text-gray-600 text-sm py-4 text-center border-t">
-        tendr © | Support | Help Center | Vendor Support
-      </footer>
+      <Footer/>
     </div>
   );
 };
