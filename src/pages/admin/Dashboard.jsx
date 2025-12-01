@@ -5,16 +5,44 @@ import EastIcon from "@mui/icons-material/East";
 
 import Dashboards_Nav from "../../components/Dashboards_Nav";
 
-import { LineChart_UserVendorGrowth_AdminDashboard, LineChart_BookingsPerMonth_AdminDashboard, Doughnut_BookingCategory_AdminDashboard, Doughnut_BookingCity_AdminDashboard, Doughnut_VendorCity_AdminDashboard, Doughnut_UserCity_AdminDashboard, LineChart_UserNew_AdminDashboard } from "../../components/Charts_Dashboards";
-import MenuIcon from '@mui/icons-material/Menu';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import {
+  LineChart_UserVendorGrowth_AdminDashboard,
+  LineChart_BookingsPerMonth_AdminDashboard,
+  Doughnut_BookingCategory_AdminDashboard,
+  Doughnut_BookingCity_AdminDashboard,
+  Doughnut_VendorCity_AdminDashboard,
+  Doughnut_UserCity_AdminDashboard,
+  LineChart_UserNew_AdminDashboard,
+} from "../../components/Charts_Dashboards";
+import MenuIcon from "@mui/icons-material/Menu";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
-import { LayoutDashboard, IndianRupee, TicketSlash, ChartColumnDecreasing, UserRound, BriefcaseBusiness, BadgeIndianRupee, MessageCircle, MessagesSquare, CalendarCheck2, CalendarClock, CalendarFold, CalendarX2, Camera, Music, SprayCan, HandPlatter, Store, Handshake, MonitorCheck, MonitorX, UserPlus } from 'lucide-react';
+import {
+  LayoutDashboard,
+  IndianRupee,
+  TicketSlash,
+  ChartColumnDecreasing,
+  UserRound,
+  BriefcaseBusiness,
+  BadgeIndianRupee,
+  MessageCircle,
+  MessagesSquare,
+  CalendarCheck2,
+  CalendarClock,
+  CalendarFold,
+  CalendarX2,
+  Camera,
+  Music,
+  SprayCan,
+  HandPlatter,
+  Store,
+  Handshake,
+  MonitorCheck,
+  MonitorX,
+  UserPlus,
+} from "lucide-react";
 import useConversations from "../../hooks/useConversations";
 import { getConversationMessages } from "../../apis/conversationsApi";
-
-
-
 
 const formatEarnings = (amount) => {
   if (amount >= 1000) {
@@ -23,155 +51,155 @@ const formatEarnings = (amount) => {
   return `₹${amount}`;
 };
 
-const getInitials = (name) =>{
+const getInitials = (name) => {
   const names = name.split(" ");
   const initials = names.map((n) => n.charAt(0).toUpperCase()).join("");
   return initials;
-}
+};
 
 const formatTimeIST = (isoDate) => {
   const date = new Date(isoDate);
-  
-  const options = {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-    timeZone: 'Asia/Kolkata'
-  }
 
-  return new Intl.DateTimeFormat('en-IN', options).format(date);
+  const options = {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+    timeZone: "Asia/Kolkata",
+  };
+
+  return new Intl.DateTimeFormat("en-IN", options).format(date);
 };
 
 const stats_dashboard = [
   {
-    label: 'Users Count',
+    label: "Users Count",
     value: 1229,
     icon: <UserRound size={32} className="text-[#d08f4e]" />,
-    key: 'customer'
+    key: "customer",
   },
   {
-    label: 'Vendor Count',
+    label: "Vendor Count",
     value: 305,
     icon: <BriefcaseBusiness size={32} className="text-[#d08f4e]" />,
-    key: 'vendor'
+    key: "vendor",
   },
   {
-    label: 'Completed Bookings',
+    label: "Completed Bookings",
     value: 689,
     icon: <CalendarCheck2 size={32} className="text-[#d08f4e]" />,
-    key: 'events-completed'
+    key: "events-completed",
   },
   {
-    label: 'Pending Bookings',
+    label: "Pending Bookings",
     value: 132,
     icon: <CalendarClock size={32} className="text-[#d08f4e]" />,
-    key: 'events-due'
-  }
+    key: "events-due",
+  },
 ];
 
 const stats_bookings = [
   {
-    label: 'Total Bookings',
+    label: "Total Bookings",
     value: 838,
     icon: <CalendarFold size={32} className="text-[#d08f4e]" />,
-    key: 'customer'
+    key: "customer",
   },
   {
-    label: 'Completed Bookings',
+    label: "Completed Bookings",
     value: 689,
     icon: <CalendarCheck2 size={32} className="text-[#d08f4e]" />,
-    key: 'vendor'
+    key: "vendor",
   },
   {
-    label: 'Pending Bookings',
+    label: "Pending Bookings",
     value: 132,
     icon: <CalendarClock size={32} className="text-[#d08f4e]" />,
-    key: 'events-completed'
+    key: "events-completed",
   },
   {
-    label: 'Cancelled Bookings',
+    label: "Cancelled Bookings",
     value: 17,
     icon: <CalendarX2 size={32} className="text-[#d08f4e]" />,
-    key: 'events-due'
-  }
+    key: "events-due",
+  },
 ];
 
 const stats_payments = [
   {
-    label: 'Total Payments',
+    label: "Total Payments",
     value: 208,
     icon: <CalendarFold size={32} className="text-[#d08f4e]" />,
-    key: 'customer'
+    key: "customer",
   },
   {
-    label: 'Payments done this month',
+    label: "Payments done this month",
     value: 159,
     icon: <CalendarCheck2 size={32} className="text-[#d08f4e]" />,
-    key: 'vendor'
+    key: "vendor",
   },
   {
-    label: 'Total Revenue',
+    label: "Total Revenue",
     value: 49,
     icon: <CalendarClock size={32} className="text-[#d08f4e]" />,
-    key: 'events-completed'
+    key: "events-completed",
   },
   {
-    label: 'Total Payouts to Vendors',
+    label: "Total Payouts to Vendors",
     value: 17,
     icon: <CalendarX2 size={32} className="text-[#d08f4e]" />,
-    key: 'events-due'
-  }
+    key: "events-due",
+  },
 ];
 
 const stats_vendors = [
   {
-    label: 'Total Vendors',
+    label: "Total Vendors",
     value: 305,
     icon: <BriefcaseBusiness size={32} className="text-[#d08f4e]" />,
-    key: 'customer'
+    key: "customer",
   },
   {
-    label: 'Total Caterers',
+    label: "Total Caterers",
     value: 82,
     icon: <HandPlatter size={32} className="text-[#d08f4e]" />,
-    key: 'vendor'
+    key: "vendor",
   },
   {
-    label: 'Total DJs',
+    label: "Total DJs",
     value: 77,
     icon: <Music size={32} className="text-[#d08f4e]" />,
-    key: 'events-completed'
+    key: "events-completed",
   },
   {
-    label: 'Total Decorators',
+    label: "Total Decorators",
     value: 67,
     icon: <SprayCan size={32} className="text-[#d08f4e]" />,
-    key: 'events-due'
+    key: "events-due",
   },
   {
-    label: 'Total Photographers',
+    label: "Total Photographers",
     value: 79,
     icon: <Camera size={32} className="text-[#d08f4e]" />,
-    key: 'events-due'
+    key: "events-due",
   },
   {
-    label: 'New Vendors this month',
+    label: "New Vendors this month",
     value: 28,
     icon: <Handshake size={32} className="text-[#d08f4e]" />,
-    key: 'events-due'
+    key: "events-due",
   },
   {
-    label: 'Active Vendors',
+    label: "Active Vendors",
     value: 219,
     icon: <MonitorCheck size={32} className="text-[#d08f4e]" />,
-    key: 'events-due'
+    key: "events-due",
   },
   {
-    label: 'Inactive Vendors',
+    label: "Inactive Vendors",
     value: 86,
     icon: <MonitorX size={32} className="text-[#d08f4e]" />,
-    key: 'events-due'
-  }
+    key: "events-due",
+  },
 ];
 
 const topVendors = [
@@ -188,29 +216,29 @@ const topEarners = [
 
 const stats_users = [
   {
-    label: 'Total Users',
+    label: "Total Users",
     value: 1229,
     icon: <UserRound size={32} className="text-[#d08f4e]" />,
-    key: 'customer'
+    key: "customer",
   },
   {
-    label: 'Active Users',
+    label: "Active Users",
     value: 412,
     icon: <MonitorCheck size={32} className="text-[#d08f4e]" />,
-    key: 'vendor'
+    key: "vendor",
   },
   {
-    label: 'New Users this month',
+    label: "New Users this month",
     value: 121,
     icon: <UserPlus size={32} className="text-[#d08f4e]" />,
-    key: 'events-completed'
+    key: "events-completed",
   },
   {
-    label: 'Repeat Users',
+    label: "Repeat Users",
     value: 185,
     icon: <Handshake size={32} className="text-[#d08f4e]" />,
-    key: 'events-due'
-  }
+    key: "events-due",
+  },
 ];
 
 const sidebar_arr = [
@@ -245,7 +273,7 @@ const sidebar_arr = [
     key: "Chat",
   },
   {
-    label: 'Chat-Support',       
+    label: "Chat-Support",
     icon: <MessagesSquare size={22} />,
     key: "ChatSupport",
   },
@@ -256,21 +284,20 @@ const sidebar_arr = [
   },
 ];
 
-
-
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeDropdown, setactiveDropdown] = useState("dashboard");
   const [selectedChat, setSelectedChat] = useState(null);
-  const [currentConversation, setCurrentConversation] = useState([])
-  const {recentChats, supportChats, adminChats} = useConversations({ enabled: true });
+  const [currentConversation, setCurrentConversation] = useState([]);
+  const { recentChats, supportChats, adminChats } = useConversations({
+    enabled: true,
+  });
 
-  const loadConversation = async (id) =>{
+  const loadConversation = async (id) => {
     const convo = await getConversationMessages(id);
     setCurrentConversation(convo);
-  }
-   
+  };
 
   return (
     <div className="flex flex-col h-screen">
@@ -343,38 +370,44 @@ const AdminDashboard = () => {
 
             {/* Bottom Buttons */}
             {sidebarOpen ? (
-              <div className="mt-auto flex flex-col gap-2 w-full items-center">
+              <div className="mt-auto flex flex-col gap-1 sm:gap-2 w-full items-center px-2">
                 {/* Go Back */}
                 <button
                   type="button"
                   onClick={() => navigate("/")}
-                  className="w-[50px] sm:w-[120px] xl:w-[200px] flex justify-center items-center gap-2 sm:pr-4 py-2 text-black bg-white hover:shadow-md transition-all duration-300 rounded-full"
+                  className="w-10 sm:w-28 md:w-32 lg:w-40 flex justify-center items-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-xs sm:text-sm text-black bg-white hover:shadow-md hover:bg-gray-50 transition-all duration-300 rounded-full"
+                  title="Go Back"
                 >
-                  <span className="text-base font-semibold hidden sm:block">
+                  <span className="font-semibold hidden sm:inline">
                     Go Back
                   </span>
+                  <span className="sm:hidden text-lg">←</span>
                 </button>
 
                 {/* Hide */}
                 <button
                   type="button"
                   onClick={() => setSidebarOpen(false)}
-                  className="w-[50px] sm:w-[120px] xl:w-[200px] flex justify-center items-center gap-2 sm:pr-4 py-2 text-black bg-white hover:shadow-md transition-all duration-300 rounded-full"
+                  className="w-10 sm:w-28 md:w-32 lg:w-40 flex justify-center items-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-xs sm:text-sm text-black bg-white hover:shadow-md hover:bg-gray-50 transition-all duration-300 rounded-full"
+                  title="Hide Sidebar"
                 >
-                  <KeyboardArrowLeftIcon />
-                  <span className="text-base font-semibold hidden sm:block">
-                    Hide
-                  </span>
+                  <KeyboardArrowLeftIcon
+                    fontSize="small"
+                    className="hidden sm:block"
+                  />
+                  <span className="font-semibold hidden sm:inline">Hide</span>
+                  {/* <span className="sm:hidden text-lg">✕</span> */}
                 </button>
               </div>
             ) : (
               // Collapsed Hamburger
-              <div className="absolute top-1/2 left-0 w-full flex justify-center -translate-y-1/2">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-auto flex justify-center">
                 <button
                   onClick={() => setSidebarOpen(true)}
-                  className="p-2 rounded-lg hover:bg-[#ffdc73]"
+                  className="p-2 sm:p-3 rounded-lg hover:bg-[#ffdc73] transition-colors duration-300"
+                  title="Show Sidebar"
                 >
-                  <MenuIcon className="text-[#CCAB4A]" />
+                  <MenuIcon className="text-[#CCAB4A] text-lg sm:text-2xl" />
                 </button>
               </div>
             )}
@@ -382,29 +415,29 @@ const AdminDashboard = () => {
         </div>
 
         {activeDropdown === "dashboard" && (
-          <div className="right-dashboard w-[70%] xs:w-[85%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-10">
+          <div className="right-dashboard w-full sm:w-[85%] md:w-[75%] lg:w-[70%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-4 sm:px-6 md:px-8 lg:px-10 py-4 overflow-y-auto">
             {/* Heading */}
-            <div className="heading font-semibold text-[32px] xs:text-4xl sm:text-5xl my-4 text-[#d08f4e]">
+            <div className="heading font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl my-4 text-[#d08f4e]">
               Dashboard
             </div>
 
             {/* Info Cards Upper */}
             <div className="py-4">
-              <div className="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {stats_dashboard.map((item) => (
                   <div
                     key={item.key}
-                    className="h-[180px] w-[100%] px-6 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-between py-5"
+                    className="min-h-[160px] sm:min-h-[180px] w-full px-4 sm:px-6 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-between py-4 sm:py-5 hover:shadow-md transition-shadow"
                   >
                     {/* Icon */}
-                    <div className="icon">{item.icon}</div>
+                    <div className="icon text-[#d08f4e]">{item.icon}</div>
 
                     {/* Bottom Content */}
-                    <div className="content flex flex-col items-center">
-                      <div className="heading font-semibold text-lg text-gray-500 leading-none text-center">
+                    <div className="content flex flex-col items-center gap-2">
+                      <div className="heading font-semibold text-sm sm:text-base lg:text-lg text-gray-500 leading-tight text-center">
                         {item.label}
                       </div>
-                      <div className="metric text-[75px] font-bold text-[#CCAB4A] leading-[70px]">
+                      <div className="metric text-4xl sm:text-5xl md:text-6xl lg:text-[75px] font-bold text-[#CCAB4A] leading-tight">
                         {item.value}
                       </div>
                     </div>
@@ -414,23 +447,23 @@ const AdminDashboard = () => {
             </div>
 
             {/* Info Cards Lower */}
-            <div className="grid grid-cols-1 mt-4 sm:grid-cols-2 gap-6 mb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-10 mt-4 sm:mt-8">
               {/* New Users and Vendors per month */}
-              <div className="h-[400px] w-full px-6 py-5 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start">
-                <div className="heading font-semibold text-2xl text-black mb-2">
+              <div className="max-h-[300px] sm:min-h-[350px] md:min-h-[400px] w-full px-4 sm:px-6 py-4 sm:py-5 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start hover:shadow-md transition-shadow">
+                <div className="heading font-semibold text-lg sm:text-xl md:text-2xl text-black mb-2 sm:mb-4">
                   New Users and Vendors per month
                 </div>
-                <div className="flex-1 flex items-center justify-center">
+                <div className="flex-1 flex items-center justify-center max-h-[250px]">
                   <LineChart_UserVendorGrowth_AdminDashboard />
                 </div>
               </div>
 
               {/* New Bookings per month */}
-              <div className="h-[400px] w-full px-6 py-5 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start">
-                <div className="heading font-semibold text-2xl text-black mb-2">
+              <div className="max-h-[300px] sm:min-h-[350px] md:min-h-[400px] w-full px-4 sm:px-6 py-4 sm:py-5 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start hover:shadow-md transition-shadow">
+                <div className="heading font-semibold text-lg sm:text-xl md:text-2xl text-black mb-2 sm:mb-4">
                   New Bookings per month
                 </div>
-                <div className="flex-1 flex items-center justify-center text-gray-400">
+                <div className="flex-1 flex items-center justify-center max-h-[250px] text-gray-400">
                   <LineChart_BookingsPerMonth_AdminDashboard />
                 </div>
               </div>
@@ -439,29 +472,29 @@ const AdminDashboard = () => {
         )}
 
         {activeDropdown === "bookings" && (
-          <div className="right-dashboard w-[70%] xs:w-[85%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-10">
+          <div className="right-dashboard w-full sm:w-[85%] md:w-[75%] lg:w-[70%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-4 sm:px-6 md:px-8 lg:px-10 py-4 overflow-y-auto">
             {/* Heading */}
-            <div className="heading font-semibold text-[32px] xs:text-4xl sm:text-5xl my-4 text-[#d08f4e]">
+            <div className="heading font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl my-4 text-[#d08f4e]">
               Bookings
             </div>
 
             {/* Info Cards Upper */}
             <div className="py-4">
-              <div className="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {stats_bookings.map((item) => (
                   <div
                     key={item.key}
-                    className="h-[180px] w-[100%] px-6 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-between py-5"
+                    className="min-h-[160px] sm:min-h-[180px] w-full px-4 sm:px-6 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-between py-4 sm:py-5 hover:shadow-md transition-shadow"
                   >
                     {/* Icon */}
-                    <div className="icon">{item.icon}</div>
+                    <div className="icon text-[#d08f4e]">{item.icon}</div>
 
                     {/* Bottom Content */}
-                    <div className="content flex flex-col items-center">
-                      <div className="heading font-semibold text-lg text-gray-500 leading-none text-center">
+                    <div className="content flex flex-col items-center gap-2">
+                      <div className="heading font-semibold text-sm sm:text-base lg:text-lg text-gray-500 leading-tight text-center">
                         {item.label}
                       </div>
-                      <div className="metric text-[75px] font-bold text-[#CCAB4A] leading-[70px]">
+                      <div className="metric text-4xl sm:text-5xl md:text-6xl lg:text-[75px] font-bold text-[#CCAB4A] leading-tight">
                         {item.value}
                       </div>
                     </div>
@@ -471,23 +504,23 @@ const AdminDashboard = () => {
             </div>
 
             {/* Info Cards Lower */}
-            <div className="grid grid-cols-1 mt-4 sm:grid-cols-2 gap-6 mb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-10 mt-4 sm:mt-8">
               {/* Booking by Category */}
-              <div className="h-[400px] w-full px-6 py-5 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start">
-                <div className="heading font-semibold text-2xl text-black mb-2">
+              <div className="min-h-[300px] sm:min-h-[350px] md:min-h-[400px] w-full px-4 sm:px-6 py-4 sm:py-5 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start hover:shadow-md transition-shadow">
+                <div className="heading font-semibold text-lg sm:text-xl md:text-2xl text-black mb-2 sm:mb-4">
                   Booking by Category
                 </div>
-                <div className="flex-1 flex items-center justify-center">
+                <div className="flex-1 flex items-center justify-center min-h-[250px]">
                   <Doughnut_BookingCategory_AdminDashboard />
                 </div>
               </div>
 
               {/* Booking by City */}
-              <div className="h-[400px] w-full px-6 py-5 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start">
-                <div className="heading font-semibold text-2xl text-black mb-2">
+              <div className="min-h-[300px] sm:min-h-[350px] md:min-h-[400px] w-full px-4 sm:px-6 py-4 sm:py-5 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start hover:shadow-md transition-shadow">
+                <div className="heading font-semibold text-lg sm:text-xl md:text-2xl text-black mb-2 sm:mb-4">
                   Booking by City
                 </div>
-                <div className="flex-1 flex items-center justify-center text-gray-400">
+                <div className="flex-1 flex items-center justify-center min-h-[250px] text-gray-400">
                   <Doughnut_BookingCity_AdminDashboard />
                 </div>
               </div>
@@ -496,29 +529,29 @@ const AdminDashboard = () => {
         )}
 
         {activeDropdown === "payments" && (
-          <div className="right-dashboard w-[70%] xs:w-[85%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-10">
+          <div className="right-dashboard w-full sm:w-[85%] md:w-[75%] lg:w-[70%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-4 sm:px-6 md:px-8 lg:px-10 py-4 overflow-y-auto">
             {/* Heading */}
-            <div className="heading font-semibold text-[32px] xs:text-4xl sm:text-5xl my-4 text-[#d08f4e]">
+            <div className="heading font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl my-4 text-[#d08f4e]">
               Payments
             </div>
 
             {/* Info Cards Upper */}
             <div className="py-4">
-              <div className="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {stats_payments.map((item) => (
                   <div
                     key={item.key}
-                    className="h-[180px] w-[100%] px-6 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-between py-5"
+                    className="min-h-[160px] sm:min-h-[180px] w-full px-4 sm:px-6 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-between py-4 sm:py-5 hover:shadow-md transition-shadow"
                   >
                     {/* Icon */}
-                    <div className="icon">{item.icon}</div>
+                    <div className="icon text-[#d08f4e]">{item.icon}</div>
 
                     {/* Bottom Content */}
-                    <div className="content flex flex-col items-center">
-                      <div className="heading font-semibold text-lg text-gray-500 leading-none text-center">
+                    <div className="content flex flex-col items-center gap-2">
+                      <div className="heading font-semibold text-sm sm:text-base lg:text-lg text-gray-500 leading-tight text-center">
                         {item.label}
                       </div>
-                      <div className="metric text-[75px] font-bold text-[#CCAB4A] leading-[70px]">
+                      <div className="metric text-4xl sm:text-5xl md:text-6xl lg:text-[75px] font-bold text-[#CCAB4A] leading-tight">
                         {item.value}
                       </div>
                     </div>
@@ -528,23 +561,23 @@ const AdminDashboard = () => {
             </div>
 
             {/* Info Cards Lower */}
-            <div className="grid grid-cols-1 mt-4 sm:grid-cols-2 gap-6 mb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-10 mt-4 sm:mt-8">
               {/* Booking by Category */}
-              <div className="h-[400px] w-full px-6 py-5 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start">
-                <div className="heading font-semibold text-2xl text-black mb-2">
+              <div className="min-h-[300px] sm:min-h-[350px] md:min-h-[400px] w-full px-4 sm:px-6 py-4 sm:py-5 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start hover:shadow-md transition-shadow">
+                <div className="heading font-semibold text-lg sm:text-xl md:text-2xl text-black mb-2 sm:mb-4">
                   Booking by Category
                 </div>
-                <div className="flex-1 flex items-center justify-center">
+                <div className="flex-1 flex items-center justify-center min-h-[250px]">
                   <Doughnut_BookingCategory_AdminDashboard />
                 </div>
               </div>
 
               {/* Booking by City */}
-              <div className="h-[400px] w-full px-6 py-5 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start">
-                <div className="heading font-semibold text-2xl text-black mb-2">
+              <div className="min-h-[300px] sm:min-h-[350px] md:min-h-[400px] w-full px-4 sm:px-6 py-4 sm:py-5 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start hover:shadow-md transition-shadow">
+                <div className="heading font-semibold text-lg sm:text-xl md:text-2xl text-black mb-2 sm:mb-4">
                   Booking by City
                 </div>
-                <div className="flex-1 flex items-center justify-center text-gray-400">
+                <div className="flex-1 flex items-center justify-center min-h-[250px] text-gray-400">
                   <Doughnut_BookingCity_AdminDashboard />
                 </div>
               </div>
@@ -553,29 +586,29 @@ const AdminDashboard = () => {
         )}
 
         {activeDropdown === "vendors" && (
-          <div className="right-dashboard w-[70%] xs:w-[85%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-10">
+          <div className="right-dashboard w-full sm:w-[85%] md:w-[75%] lg:w-[70%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-4 sm:px-6 md:px-8 lg:px-10 py-4 overflow-y-auto">
             {/* Heading */}
-            <div className="heading font-semibold text-[32px] xs:text-4xl sm:text-5xl my-4 text-[#d08f4e]">
+            <div className="heading font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl my-4 text-[#d08f4e]">
               Vendors
             </div>
 
             {/* Info Cards Upper */}
             <div className="py-4">
-              <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {stats_vendors.map((item) => (
                   <div
                     key={item.key}
-                    className="h-[180px] w-[100%] px-6 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-between py-5"
+                    className="min-h-[160px] sm:min-h-[180px] w-full px-4 sm:px-6 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-between py-4 sm:py-5 hover:shadow-md transition-shadow"
                   >
                     {/* Icon */}
-                    <div className="icon">{item.icon}</div>
+                    <div className="icon text-[#d08f4e]">{item.icon}</div>
 
                     {/* Bottom Content */}
-                    <div className="content flex flex-col items-center">
-                      <div className="heading font-semibold text-lg text-gray-500 leading-none text-center">
+                    <div className="content flex flex-col items-center gap-2">
+                      <div className="heading font-semibold text-sm sm:text-base lg:text-lg text-gray-500 leading-tight text-center">
                         {item.label}
                       </div>
-                      <div className="metric text-[75px] font-bold text-[#CCAB4A] leading-[70px]">
+                      <div className="metric text-4xl sm:text-5xl md:text-6xl lg:text-[75px] font-bold text-[#CCAB4A] leading-tight">
                         {item.value}
                       </div>
                     </div>
@@ -585,45 +618,45 @@ const AdminDashboard = () => {
             </div>
 
             {/* Info Cards Lower */}
-            <div className="grid grid-cols-1 mt-4 lg:grid-cols-2 gap-6 mb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-10 mt-4 sm:mt-8">
               {/* Two side-by-side custom columns */}
-              <div className="w-full grid grid-cols-1 2xl:grid-cols-2 gap-6">
+              <div className="w-full grid grid-cols-1 2xl:grid-cols-2 gap-4 sm:gap-6">
                 {/* Left box */}
-                <div className="flex-1 px-6 py-5 bg-white border-2 border-[#CCAB4A] rounded-[20px] flex flex-col justify-start">
+                <div className="flex-1 px-4 sm:px-6 py-4 sm:py-5 bg-white border-2 border-[#CCAB4A] rounded-[16px] sm:rounded-[20px] flex flex-col justify-start hover:shadow-md transition-shadow">
                   {/* Heading */}
                   <div className="mb-4">
-                    <div className="text-2xl font-semibold text-black">
+                    <div className="text-lg sm:text-xl md:text-2xl font-semibold text-black">
                       Top Performers
                     </div>
-                    <div className="text-base text-gray-400 leading-4">
+                    <div className="text-sm sm:text-base text-gray-400 leading-4">
                       Total bookings handled
                     </div>
                   </div>
 
                   {/* Vendor list */}
-                  <div className="flex-1 flex flex-col justify-evenly space-y-4">
+                  <div className="flex-1 flex flex-col justify-evenly space-y-3 sm:space-y-4">
                     {topVendors.map((vendor, index) => (
                       <div
                         key={index}
                         className="flex justify-between items-start group cursor-pointer"
                       >
                         {/* Left: medal + name */}
-                        <div className="flex items-start gap-2 w-[210px]">
-                          <div className="text-2xl leading-tight group-hover:text-3xl transition-all duration-500">
+                        <div className="flex items-start gap-2 flex-1 min-w-0">
+                          <div className="text-xl sm:text-2xl leading-tight group-hover:text-2xl sm:group-hover:text-3xl transition-all duration-500 flex-shrink-0">
                             {vendor.medal}
                           </div>
-                          <div className="flex flex-col">
-                            <span className="font-semibold text-xl leading-none break-words">
+                          <div className="flex flex-col min-w-0">
+                            <span className="font-semibold text-base sm:text-lg leading-none break-words">
                               {vendor.name}
                             </span>
-                            <span className="text-sm text-gray-500 mt-2">
+                            <span className="text-xs sm:text-sm text-gray-500 mt-2">
                               {vendor.city}
                             </span>
                           </div>
                         </div>
 
                         {/* Right: booking count */}
-                        <div className="text-[#CCAB4A] font-bold text-2xl leading-none">
+                        <div className="text-[#CCAB4A] font-bold text-lg sm:text-2xl leading-none flex-shrink-0 ml-2">
                           {vendor.bookings}
                         </div>
                       </div>
@@ -632,41 +665,41 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* Right box */}
-                <div className="flex-1 px-6 py-5 bg-white border-2 border-[#CCAB4A] rounded-[20px] flex flex-col justify-start">
+                <div className="flex-1 px-4 sm:px-6 py-4 sm:py-5 bg-white border-2 border-[#CCAB4A] rounded-[16px] sm:rounded-[20px] flex flex-col justify-start hover:shadow-md transition-shadow">
                   {/* Heading */}
                   <div className="mb-4">
-                    <div className="text-2xl font-semibold text-black">
+                    <div className="text-lg sm:text-xl md:text-2xl font-semibold text-black">
                       Top Earners
                     </div>
-                    <div className="text-base text-gray-400 leading-4">
+                    <div className="text-sm sm:text-base text-gray-400 leading-4">
                       Total revenue generated
                     </div>
                   </div>
 
                   {/* Earner list */}
-                  <div className="flex-1 flex flex-col justify-evenly space-y-4">
+                  <div className="flex-1 flex flex-col justify-evenly space-y-3 sm:space-y-4">
                     {topEarners.map((earner, index) => (
                       <div
                         key={index}
                         className="flex justify-between items-start group cursor-pointer"
                       >
                         {/* Left: medal + name */}
-                        <div className="flex items-start gap-2 w-[170px]">
-                          <div className="text-2xl leading-tight group-hover:text-3xl transition-all duration-500">
+                        <div className="flex items-start gap-2 flex-1 min-w-0">
+                          <div className="text-xl sm:text-2xl leading-tight group-hover:text-2xl sm:group-hover:text-3xl transition-all duration-500 flex-shrink-0">
                             {earner.medal}
                           </div>
-                          <div className="flex flex-col">
-                            <span className="font-semibold text-xl leading-none break-words">
+                          <div className="flex flex-col min-w-0">
+                            <span className="font-semibold text-base sm:text-lg leading-none break-words">
                               {earner.name}
                             </span>
-                            <span className="text-sm text-gray-500 mt-2">
+                            <span className="text-xs sm:text-sm text-gray-500 mt-2">
                               {earner.city}
                             </span>
                           </div>
                         </div>
 
                         {/* Right: Earnings */}
-                        <div className="text-[#CCAB4A] font-bold text-2xl leading-none whitespace-nowrap">
+                        <div className="text-[#CCAB4A] font-bold text-lg sm:text-2xl leading-none whitespace-nowrap flex-shrink-0 ml-2">
                           {formatEarnings(earner.earnings)}
                         </div>
                       </div>
@@ -676,11 +709,11 @@ const AdminDashboard = () => {
               </div>
 
               {/* Vendors by City */}
-              <div className="h-[400px] w-full px-6 py-5 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start">
-                <div className="heading font-semibold text-2xl text-black mb-2">
+              <div className="min-h-[300px] sm:min-h-[350px] md:min-h-[400px] w-full px-4 sm:px-6 py-4 sm:py-5 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start hover:shadow-md transition-shadow">
+                <div className="heading font-semibold text-lg sm:text-xl md:text-2xl text-black mb-2 sm:mb-4">
                   Vendors by City
                 </div>
-                <div className="flex-1 flex items-center justify-center text-gray-400">
+                <div className="flex-1 flex items-center justify-center min-h-[250px] text-gray-400">
                   <Doughnut_VendorCity_AdminDashboard />
                 </div>
               </div>
@@ -689,29 +722,29 @@ const AdminDashboard = () => {
         )}
 
         {activeDropdown === "users" && (
-          <div className="right-dashboard w-[70%] xs:w-[85%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-10">
+          <div className="right-dashboard w-full sm:w-[85%] md:w-[75%] lg:w-[70%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-4 sm:px-6 md:px-8 lg:px-10 py-4 overflow-y-auto">
             {/* Heading */}
-            <div className="heading font-semibold text-[32px] xs:text-4xl sm:text-5xl my-4 text-[#d08f4e]">
+            <div className="heading font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl my-4 text-[#d08f4e]">
               Users
             </div>
 
             {/* Info Cards Upper */}
             <div className="py-4">
-              <div className="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {stats_users.map((item) => (
                   <div
                     key={item.key}
-                    className="h-[180px] w-[100%] px-6 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-between py-5"
+                    className="min-h-[160px] sm:min-h-[180px] w-full px-4 sm:px-6 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-between py-4 sm:py-5 hover:shadow-md transition-shadow"
                   >
                     {/* Icon */}
-                    <div className="icon">{item.icon}</div>
+                    <div className="icon text-[#d08f4e]">{item.icon}</div>
 
                     {/* Bottom Content */}
-                    <div className="content flex flex-col items-center">
-                      <div className="heading font-semibold text-lg text-gray-500 leading-none text-center">
+                    <div className="content flex flex-col items-center gap-2">
+                      <div className="heading font-semibold text-sm sm:text-base lg:text-lg text-gray-500 leading-tight text-center">
                         {item.label}
                       </div>
-                      <div className="metric text-[75px] font-bold text-[#CCAB4A] leading-[70px]">
+                      <div className="metric text-4xl sm:text-5xl md:text-6xl lg:text-[75px] font-bold text-[#CCAB4A] leading-tight">
                         {item.value}
                       </div>
                     </div>
@@ -721,23 +754,23 @@ const AdminDashboard = () => {
             </div>
 
             {/* Info Cards Lower */}
-            <div className="grid grid-cols-1 mt-4 sm:grid-cols-2 gap-6 mb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-10 mt-4 sm:mt-8">
               {/* Users by City */}
-              <div className="h-[400px] w-full px-6 py-5 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start">
-                <div className="heading font-semibold text-2xl text-black mb-2">
+              <div className="min-h-[300px] sm:min-h-[350px] md:min-h-[400px] w-full px-4 sm:px-6 py-4 sm:py-5 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start hover:shadow-md transition-shadow">
+                <div className="heading font-semibold text-lg sm:text-xl md:text-2xl text-black mb-2 sm:mb-4">
                   Users by City
                 </div>
-                <div className="flex-1 flex items-center justify-center">
+                <div className="flex-1 flex items-center justify-center min-h-[250px]">
                   <Doughnut_UserCity_AdminDashboard />
                 </div>
               </div>
 
               {/* New Users per month */}
-              <div className="h-[400px] w-full px-6 py-5 rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start">
-                <div className="heading font-semibold text-2xl text-black mb-2">
+              <div className="min-h-[300px] sm:min-h-[350px] md:min-h-[400px] w-full px-4 sm:px-6 py-4 sm:py-5 rounded-[16px] sm:rounded-[20px] bg-white border-2 border-[#CCAB4A] flex flex-col justify-start hover:shadow-md transition-shadow">
+                <div className="heading font-semibold text-lg sm:text-xl md:text-2xl text-black mb-2 sm:mb-4">
                   New Users per month
                 </div>
-                <div className="flex-1 flex items-center justify-center text-gray-400">
+                <div className="flex-1 flex items-center justify-center min-h-[250px] text-gray-400">
                   <LineChart_UserNew_AdminDashboard />
                 </div>
               </div>
@@ -746,14 +779,14 @@ const AdminDashboard = () => {
         )}
 
         {activeDropdown === "chat" && (
-          <div className="right-dashboard w-[70%] xs:w-[85%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-10">
-            <div className="heading font-semibold text-[32px] xs:text-4xl sm:text-5xl my-4 text-[#d08f4e]">
+          <div className="right-dashboard w-full sm:w-[85%] md:w-[75%] lg:w-[70%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-4 sm:px-6 md:px-8 lg:px-10 py-4 overflow-y-auto">
+            <div className="heading font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl my-4 text-[#d08f4e]">
               Chat
             </div>
 
-            <div className="h-[600px] w-full bg-white border-2 border-[#CCAB4A] rounded-[20px] flex overflow-hidden">
+            <div className="min-h-[500px] sm:min-h-[600px] w-full bg-white border-2 border-[#CCAB4A] rounded-[16px] sm:rounded-[20px] flex flex-col sm:flex-row overflow-hidden hover:shadow-md transition-shadow">
               {/* LEFT - Recent Conversations */}
-              <div className="w-1/3 border-r border-[#F1E1A8] overflow-y-auto">
+              <div className="w-full sm:w-1/3 border-b sm:border-b-0 sm:border-r border-[#F1E1A8] overflow-y-auto max-h-[300px] sm:max-h-none">
                 {recentChats.map((c, idx) => (
                   <div
                     key={idx}
@@ -761,39 +794,43 @@ const AdminDashboard = () => {
                       setSelectedChat(c);
                       loadConversation(c._id);
                     }}
-                    className={`flex items-center justify-between gap-2 p-4 cursor-pointer hover:bg-[#FFF4D4] transition ${
+                    className={`flex items-center justify-between gap-2 p-3 sm:p-4 cursor-pointer hover:bg-[#FFF4D4] transition flex-col sm:flex-row text-center sm:text-left ${
                       selectedChat?.customerId.name === c.customerId.name
                         ? "bg-[#FFF4D4]"
                         : ""
                     }`}
                   >
-                    <div className="flex items-center gap-2 flex-1">
+                    <div className="flex items-center justify-center sm:justify-start gap-2 flex-1 w-full">
                       {/* User */}
-                      <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-[#CCAB4A]">
+                      <div className="flex items-center gap-1">
+                        <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-xs sm:text-sm text-[#CCAB4A]">
                           {getInitials(c.customerId.name)}
                         </div>
-                        <span className="font-semibold">
+                        <span className="font-semibold text-xs sm:text-base hidden sm:inline">
                           {c.customerId.name}
                         </span>
                       </div>
 
-                      <span className="mx-2 text-gray-400">-</span>
+                      <span className="mx-1 sm:mx-2 text-gray-400 hidden sm:inline">
+                        -
+                      </span>
 
                       {/* Vendor */}
-                      <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-[#CCAB4A]">
+                      <div className="flex items-center gap-1">
+                        <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-xs sm:text-sm text-[#CCAB4A]">
                           {getInitials(c.vendorId.name)}
                         </div>
-                        <span className="font-semibold">{c.vendorId.name}</span>
+                        <span className="font-semibold text-xs sm:text-base hidden sm:inline">
+                          {c.vendorId.name}
+                        </span>
                       </div>
                     </div>
 
-                    <div className="flex flex-col items-end text-sm">
+                    <div className="flex flex-col items-center sm:items-end text-xs sm:text-sm">
                       <span className="text-gray-500">{c.time}</span>
 
                       {c.unread > 0 && (
-                        <span className="mt-1 w-6 h-6 flex items-center justify-center rounded-full bg-[#d08f4e] text-white text-xs font-semibold">
+                        <span className="mt-1 w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center rounded-full bg-[#d08f4e] text-white text-xs font-semibold">
                           {c.unread}
                         </span>
                       )}
@@ -807,25 +844,27 @@ const AdminDashboard = () => {
                 {selectedChat ? (
                   <>
                     {/* Header */}
-                    <div className="p-4 border-b border-[#F1E1A8] flex items-center justify-between">
+                    <div className="p-3 sm:p-4 border-b border-[#F1E1A8] flex items-center justify-between flex-wrap gap-2">
                       {/* User */}
                       <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-[#CCAB4A]">
+                        <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-xs sm:text-sm text-[#CCAB4A]">
                           {getInitials(selectedChat.customerId.name)}
                         </div>
-                        <span className="font-semibold text-lg">
+                        <span className="font-semibold text-sm sm:text-lg">
                           {selectedChat.customerId.name}
                         </span>
                       </div>
 
-                      <span className="mx-2 text-gray-400">-</span>
+                      <span className="mx-2 text-gray-400 hidden sm:inline">
+                        -
+                      </span>
 
                       {/* Vendor */}
                       <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-[#CCAB4A]">
+                        <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-xs sm:text-sm text-[#CCAB4A]">
                           {getInitials(selectedChat.vendorId.name)}
                         </div>
-                        <span className="font-semibold text-lg">
+                        <span className="font-semibold text-sm sm:text-lg">
                           {selectedChat.vendorId.name}
                         </span>
                       </div>
@@ -833,7 +872,7 @@ const AdminDashboard = () => {
 
                     {/* Messages */}
                     {currentConversation && currentConversation.length > 0 && (
-                      <div className="flex-1 p-4 overflow-y-auto text-gray-600 flex flex-col space-y-3">
+                      <div className="flex-1 p-3 sm:p-4 overflow-y-auto text-gray-600 flex flex-col space-y-2 sm:space-y-3">
                         {currentConversation.map((msg, index) => (
                           <p
                             key={index}
@@ -841,7 +880,7 @@ const AdminDashboard = () => {
                               msg.senderType === "USER"
                                 ? "self-start bg-gray-100"
                                 : "self-end bg-[#d08f4e] text-white"
-                            } px-3 py-2 rounded-lg w-fit`}
+                            } px-3 py-2 rounded-lg w-fit text-sm`}
                           >
                             {msg.message}
                           </p>
@@ -850,19 +889,19 @@ const AdminDashboard = () => {
                     )}
 
                     {/* Input Box */}
-                    <div className="p-3 border-t border-[#F1E1A8] flex gap-2">
+                    <div className="p-2 sm:p-3 border-t border-[#F1E1A8] flex gap-2">
                       <input
                         type="text"
                         placeholder="Type a message..."
-                        className="flex-1 px-4 py-2 rounded-full border border-[#CCAB4A] focus:outline-none"
+                        className="flex-1 px-3 sm:px-4 py-2 rounded-full border border-[#CCAB4A] focus:outline-none text-sm"
                       />
-                      <button className="px-4 py-2 bg-[#CCAB4A] text-white rounded-full font-semibold hover:opacity-90 transition">
+                      <button className="px-3 sm:px-4 py-2 bg-[#CCAB4A] text-white rounded-full font-semibold hover:opacity-90 transition text-sm">
                         Send
                       </button>
                     </div>
                   </>
                 ) : (
-                  <div className="flex-1 flex items-center justify-center text-gray-400">
+                  <div className="flex-1 flex items-center justify-center text-gray-400 text-sm sm:text-base">
                     Select a conversation to start monitoring
                   </div>
                 )}
@@ -872,14 +911,14 @@ const AdminDashboard = () => {
         )}
 
         {activeDropdown === "chatsupport" && (
-          <div className="right-dashboard w-[70%] xs:w-[85%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-10">
-            <div className="heading font-semibold text-[32px] xs:text-4xl sm:text-5xl my-4 text-[#d08f4e]">
+          <div className="right-dashboard w-full sm:w-[85%] md:w-[75%] lg:w-[70%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-4 sm:px-6 md:px-8 lg:px-10 py-4 overflow-y-auto">
+            <div className="heading font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl my-4 text-[#d08f4e]">
               Chat - Users
             </div>
 
-            <div className="h-[600px] w-full bg-white border-2 border-[#CCAB4A] rounded-[20px] flex overflow-hidden">
+            <div className="min-h-[500px] sm:min-h-[600px] w-full bg-white border-2 border-[#CCAB4A] rounded-[16px] sm:rounded-[20px] flex flex-col sm:flex-row overflow-hidden hover:shadow-md transition-shadow">
               {/* LEFT - User List */}
-              <div className="w-1/3 border-r border-[#F1E1A8] overflow-y-auto">
+              <div className="w-full sm:w-1/3 border-b sm:border-b-0 sm:border-r border-[#F1E1A8] overflow-y-auto max-h-[300px] sm:max-h-none">
                 {supportChats.map((c, idx) => (
                   <div
                     key={idx}
@@ -887,26 +926,25 @@ const AdminDashboard = () => {
                       setSelectedChat(c);
                       loadConversation(c._id);
                     }}
-                    className={`flex items-center justify-between p-4 cursor-pointer hover:bg-[#FFF4D4] transition ${
+                    className={`flex items-center justify-between p-3 sm:p-4 cursor-pointer hover:bg-[#FFF4D4] transition flex-col sm:flex-row text-center sm:text-left ${
                       selectedChat?.customerId.name === c.customerId.name
                         ? "bg-[#FFF4D4]"
                         : ""
                     }`}
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="w-10 h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-[#CCAB4A]">
+                    <div className="flex items-center justify-center sm:justify-start gap-2 w-full">
+                      <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-xs sm:text-sm text-[#CCAB4A]">
                         {getInitials(c.customerId.name)}
                       </div>
 
                       <div className="flex flex-col">
-                        <span className="font-semibold">
+                        <span className="font-semibold text-xs sm:text-base">
                           {c.customerId.name}
                         </span>
-
                       </div>
                     </div>
 
-                    <div className="flex flex-col items-end text-sm">
+                    <div className="flex flex-col items-center sm:items-end text-xs sm:text-sm mt-2 sm:mt-0">
                       <span className="text-gray-500">
                         {formatTimeIST(c.updatedAt)}
                       </span>
@@ -919,26 +957,26 @@ const AdminDashboard = () => {
               <div className="flex-1 flex flex-col">
                 {selectedChat ? (
                   <>
-                    <div className="p-4 border-b border-[#F1E1A8] flex items-center justify-between">
+                    <div className="p-3 sm:p-4 border-b border-[#F1E1A8] flex items-center justify-between flex-wrap gap-2">
                       <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-[#CCAB4A]">
+                        <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-xs sm:text-sm text-[#CCAB4A]">
                           {getInitials(selectedChat.customerId.name)}
                         </div>
 
-                        <span className="font-semibold text-lg">
+                        <span className="font-semibold text-sm sm:text-lg">
                           {selectedChat.customerId.name}
                         </span>
                       </div>
 
-                      <span className="text-sm text-gray-500">
+                      <span className="text-xs sm:text-sm text-gray-500">
                         {formatTimeIST(selectedChat.updatedAt)}
                       </span>
                     </div>
 
-                    <div className="flex-1 p-4 overflow-y-auto text-gray-600 flex flex-col space-y-3">
+                    <div className="flex-1 p-3 sm:p-4 overflow-y-auto text-gray-600 flex flex-col space-y-2 sm:space-y-3">
                       {currentConversation &&
                         currentConversation.length > 0 && (
-                          <div className="flex-1 p-4 overflow-y-auto text-gray-600 flex flex-col space-y-3">
+                          <div className="flex flex-col space-y-2 sm:space-y-3">
                             {currentConversation.map((msg, index) => (
                               <p
                                 key={index}
@@ -946,7 +984,7 @@ const AdminDashboard = () => {
                                   msg.senderType === "USER"
                                     ? "self-start bg-gray-100"
                                     : "self-end bg-[#d08f4e] text-white"
-                                } px-3 py-2 rounded-lg w-fit`}
+                                } px-3 py-2 rounded-lg w-fit text-sm`}
                               >
                                 {msg.message}
                               </p>
@@ -955,20 +993,20 @@ const AdminDashboard = () => {
                         )}
                     </div>
 
-                    <div className="p-3 border-t border-[#F1E1A8] flex gap-2">
+                    <div className="p-2 sm:p-3 border-t border-[#F1E1A8] flex gap-2">
                       <input
                         type="text"
                         placeholder="Type a message..."
-                        className="flex-1 px-4 py-2 rounded-full border border-[#CCAB4A] focus:outline-none"
+                        className="flex-1 px-3 sm:px-4 py-2 rounded-full border border-[#CCAB4A] focus:outline-none text-sm"
                       />
 
-                      <button className="px-4 py-2 bg-[#CCAB4A] text-white rounded-full font-semibold hover:opacity-90 transition">
+                      <button className="px-3 sm:px-4 py-2 bg-[#CCAB4A] text-white rounded-full font-semibold hover:opacity-90 transition text-sm">
                         Send
                       </button>
                     </div>
                   </>
                 ) : (
-                  <div className="flex-1 flex items-center justify-center text-gray-400">
+                  <div className="flex-1 flex items-center justify-center text-gray-400 text-sm sm:text-base">
                     Select a user to start chatting
                   </div>
                 )}
@@ -978,14 +1016,14 @@ const AdminDashboard = () => {
         )}
 
         {activeDropdown === "chatconcierge" && (
-          <div className="right-dashboard w-[70%] xs:w-[85%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-10">
-            <div className="heading font-semibold text-[32px] xs:text-4xl sm:text-5xl my-4 text-[#d08f4e]">
+          <div className="right-dashboard w-full sm:w-[85%] md:w-[75%] lg:w-[70%] bg-[#FDFAF0] border-l-2 border-[#CCAB4A] px-4 sm:px-6 md:px-8 lg:px-10 py-4 overflow-y-auto">
+            <div className="heading font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl my-4 text-[#d08f4e]">
               Chat - Events
             </div>
 
-            <div className="h-[600px] w-full bg-white border-2 border-[#CCAB4A] rounded-[20px] flex overflow-hidden">
+            <div className="min-h-[500px] sm:min-h-[600px] w-full bg-white border-2 border-[#CCAB4A] rounded-[16px] sm:rounded-[20px] flex flex-col sm:flex-row overflow-hidden hover:shadow-md transition-shadow">
               {/* LEFT - User List */}
-              <div className="w-1/3 border-r border-[#F1E1A8] overflow-y-auto">
+              <div className="w-full sm:w-1/3 border-b sm:border-b-0 sm:border-r border-[#F1E1A8] overflow-y-auto max-h-[300px] sm:max-h-none">
                 {adminChats.map((c, idx) => (
                   <div
                     key={idx}
@@ -993,25 +1031,25 @@ const AdminDashboard = () => {
                       setSelectedChat(c);
                       loadConversation(c._id);
                     }}
-                    className={`flex items-center justify-between p-4 cursor-pointer hover:bg-[#FFF4D4] transition ${
+                    className={`flex items-center justify-between p-3 sm:p-4 cursor-pointer hover:bg-[#FFF4D4] transition flex-col sm:flex-row text-center sm:text-left ${
                       selectedChat?.customerId.name === c.customerId.name
                         ? "bg-[#FFF4D4]"
                         : ""
                     }`}
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="w-10 h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-[#CCAB4A]">
+                    <div className="flex items-center justify-center sm:justify-start gap-2 w-full">
+                      <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-xs sm:text-sm text-[#CCAB4A]">
                         {getInitials(c.customerId.name)}
                       </div>
 
                       <div className="flex flex-col">
-                        <span className="font-semibold">
+                        <span className="font-semibold text-xs sm:text-base">
                           {c.customerId.name}
                         </span>
                       </div>
                     </div>
 
-                    <div className="flex flex-col items-end text-sm">
+                    <div className="flex flex-col items-center sm:items-end text-xs sm:text-sm mt-2 sm:mt-0">
                       <span className="text-gray-500">
                         {formatTimeIST(c.updatedAt)}
                       </span>
@@ -1024,26 +1062,26 @@ const AdminDashboard = () => {
               <div className="flex-1 flex flex-col">
                 {selectedChat ? (
                   <>
-                    <div className="p-4 border-b border-[#F1E1A8] flex items-center justify-between">
+                    <div className="p-3 sm:p-4 border-b border-[#F1E1A8] flex items-center justify-between flex-wrap gap-2">
                       <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-[#CCAB4A]">
+                        <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#FFF4D4] border border-[#CCAB4A] flex items-center justify-center font-semibold text-xs sm:text-sm text-[#CCAB4A]">
                           {getInitials(selectedChat.customerId.name)}
                         </div>
 
-                        <span className="font-semibold text-lg">
+                        <span className="font-semibold text-sm sm:text-lg">
                           {selectedChat.customerId.name}
                         </span>
                       </div>
 
-                      <span className="text-sm text-gray-500">
+                      <span className="text-xs sm:text-sm text-gray-500">
                         {formatTimeIST(selectedChat.updatedAt)}
                       </span>
                     </div>
 
-                    <div className="flex-1 p-4 overflow-y-auto text-gray-600 flex flex-col space-y-3">
+                    <div className="flex-1 p-3 sm:p-4 overflow-y-auto text-gray-600 flex flex-col space-y-2 sm:space-y-3">
                       {currentConversation &&
                         currentConversation.length > 0 && (
-                          <div className="flex-1 p-4 overflow-y-auto text-gray-600 flex flex-col space-y-3">
+                          <div className="flex flex-col space-y-2 sm:space-y-3">
                             {currentConversation.map((msg, index) => (
                               <p
                                 key={index}
@@ -1051,7 +1089,7 @@ const AdminDashboard = () => {
                                   msg.senderType === "USER"
                                     ? "self-start bg-gray-100"
                                     : "self-end bg-[#d08f4e] text-white"
-                                } px-3 py-2 rounded-lg w-fit`}
+                                } px-3 py-2 rounded-lg w-fit text-sm`}
                               >
                                 {msg.message}
                               </p>
@@ -1060,20 +1098,20 @@ const AdminDashboard = () => {
                         )}
                     </div>
 
-                    <div className="p-3 border-t border-[#F1E1A8] flex gap-2">
+                    <div className="p-2 sm:p-3 border-t border-[#F1E1A8] flex gap-2">
                       <input
                         type="text"
                         placeholder="Type a message..."
-                        className="flex-1 px-4 py-2 rounded-full border border-[#CCAB4A] focus:outline-none"
+                        className="flex-1 px-3 sm:px-4 py-2 rounded-full border border-[#CCAB4A] focus:outline-none text-sm"
                       />
 
-                      <button className="px-4 py-2 bg-[#CCAB4A] text-white rounded-full font-semibold hover:opacity-90 transition">
+                      <button className="px-3 sm:px-4 py-2 bg-[#CCAB4A] text-white rounded-full font-semibold hover:opacity-90 transition text-sm">
                         Send
                       </button>
                     </div>
                   </>
                 ) : (
-                  <div className="flex-1 flex items-center justify-center text-gray-400">
+                  <div className="flex-1 flex items-center justify-center text-gray-400 text-sm sm:text-base">
                     Select a user to start chatting
                   </div>
                 )}
